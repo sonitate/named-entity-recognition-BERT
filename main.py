@@ -2,20 +2,20 @@ import os
 from sklearn.metrics import precision_recall_fscore_support, classification_report
 import Bert
 import Cross_validation
-from Corpus import Corpus
+from Corpus import Corpus, word_level, entity_level
 from Parameters import global_param
 from Train import train_save, prediction
 from itertools import chain
 
 corpus=Corpus('data/PGxCorpus','pgx')
-X_app,Y_app = corpus.get_data()
+X_app,Y_app, Tokens= corpus.get_data()
 
 ###### param sup #######
 do_valid=True
 fold_num=10
 do_cross_valid=True
 
-nb_epoch = global_param.traning_param['num_ep'] # 5
+nb_epoch =global_param.traning_param['num_ep'] # 5
 lr= global_param.traning_param['lr'] # 3e-5
 bert_type= global_param.model_param['bert'] # 'bert'
 F_type= global_param.traning_param['F_type']  # 'macro'
@@ -24,7 +24,7 @@ exp_name= global_param.traning_param['exp_tag']
 
 machine_name = os.uname()[1]
 
-X_valid,Y_valid=corpus.data
+#X_valid,Y_valid, Tokens=corpus.data
 X_test,Y_test=[],[]
 
 global_param.model_param['bert']
@@ -36,8 +36,8 @@ def Experence():
 
     train_param = {
             'model': model,
-            'X_app': X_app,
-            'Y_app': Y_app,
+            'X_app': X_app[:10],
+            'Y_app': Y_app[:10],
             'nb_epoch': nb_epoch,
             'F_type': F_type,
             'lr': lr,
@@ -65,26 +65,29 @@ def Experence():
         print("/////////////////////////         CROSS RESULT          ///////////////////////////////")
 
         pred, Y_test = Cross_validation.cross_validation(train_param, train_save, fold_num)
-        
+
+        pred_words,Y_words=word_level(pred,Tokens),word_level(Y_test,Tokens)
+        pred_entities,true_entities=entity_level(pred_words,Y_words)
+
+
         chain.from_iterable([[1]])
-        
-        
-        pred, Y_test = list(chain.from_iterable(pred)), list(chain.from_iterable(Y_test))
+
+        pred_entities, true_entities = list(chain.from_iterable(pred_entities)), list(chain.from_iterable(true_entities))
         
 
-        raport = classification_report(y_pred=pred, y_true=Y_test)
+        raport = classification_report(y_pred=pred_entities, y_true=true_entities)
 
         print(raport)
 
         file = open("result_" + machine_name + "_" + F_type + ".pred", "a+")
         y, p = "", ""
-        for xp, xy in zip(pred, Y_test):
+        for xp, xy in zip(pred_entities,Y_words):
             y += ' ' + str(xy)
             p += ' ' + str(xp)
         print("Y" + y + '\nP' + p, file=file)
         file.close()
 
-    return precision_recall_fscore_support(y_pred=pred, y_true=Y_test, average=F_type), raport
+    return precision_recall_fscore_support(y_pred=pred_entities, y_true=true_entities, average=F_type), raport
 
 for k in range(10):
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")

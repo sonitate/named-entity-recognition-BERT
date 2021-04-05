@@ -69,6 +69,7 @@ def brat(path):
 
     Dataset_X = []
     Dataset_Y = []
+    Dataset_Tokens = []
 
     for ann, txt in ann_txt_files:
 
@@ -98,15 +99,68 @@ def brat(path):
 
         Dataset_X.append(get_bert_inputs(sentence))
         Dataset_Y.append([0]+target+[0])
+        Dataset_Tokens.append(tokens)
 
-    return Dataset_X, Dataset_Y
+    return Dataset_X, Dataset_Y, Dataset_Tokens
+
+
+def word_level(labels_dataset, tokens_dataset):
+   words_labels_dataset=[]
+   for  labels, tokens in zip(labels_dataset, tokens_dataset):
+        words = []
+        ws, we, i = 0, 0, 0
+        for token in tokens:
+            if '##' in token:
+                we += 1
+            else:
+                words.append((ws, we))
+                ws, we = i, i
+            i += 1
+        words.append((ws, we))
+        words = words[1:]
+        words_labels = []
+        for ws, we in words:
+            words_labels.append(max(labels[ws:we + 1]))
+        words_labels_dataset.append(words_labels)
+   return words_labels_dataset
+
+
+def entities_ranges(Y):
+    entities,ranges=[],[]
+    es, e, i = 0, -1, 0
+    for y in Y:
+        if(y!=e):
+            ranges.append((es,i))
+            entities.append(e)
+            e,es=y,i
+        i+=1
+    ranges.append((es, i))
+    entities.append(e)
+    entities,ranges=entities[1:],ranges[1:]
+    return entities,ranges
+
+def exact(pred):
+    for p in pred:
+        if p!=pred[0]:
+          return 0
+    return pred[0]
+
+def entity_level(preds,Ys):
+    pred_entities, true_entities = [],[]
+    for pred,Y in zip(preds,Ys):
+        entities, ranges =entities_ranges(Y)
+        for e,range in zip(entities,ranges):
+             if(e!=0):
+                 true_entities.append(e)
+                 pred_entities.append(exact(pred[range[0]:range[1]]))
+    return pred_entities,true_entities
 
 
 class Corpus():
 
     def __init__(self, path, name):
         self.Entityes_types = Entity_types
-        self.Nb_class = 11
+        self.Nb_class = len(Entity_types.keys())+1
         self.path = path
         self.name = name
         self.data = None
@@ -116,10 +170,4 @@ class Corpus():
             self.data = brat(self.path)
 
         return self.data
-
-
-
-#corpus =Corpus('data/PGxCorpus','pgx')
-#print(corpus.data)
-
 
