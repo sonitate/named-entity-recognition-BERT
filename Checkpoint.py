@@ -1,8 +1,11 @@
 import copy
 import os
 import torch
-from sklearn.metrics import classification_report, f1_score
+#from sklearn.metrics import classification_report, f1_score
+from seqeval.metrics import classification_report, f1_score
+from seqeval.scheme import IOBES
 
+from Corpus import words2IOBES
 from Parameters import global_param
 
 
@@ -28,7 +31,7 @@ def generate_unique_logpath(logdir, raw_run_name):
 class ModelCheckpoint:
 
 
-    def __init__(self,filepath,model,F_type='macro',save=False):
+    def __init__(self,filepath,model,F_type='macro',save=True):
 
         #self.min_loss = None
         self.best_f=None
@@ -42,7 +45,7 @@ class ModelCheckpoint:
     def update(self,pred,Y,epoch,loss,acc,do_valid=True):
 
         print('|||||||||||| do valid :',do_valid)
-        f = f1_score(y_pred=pred, y_true=Y, average=self.f_type)
+        f = f1_score(y_pred= words2IOBES(pred), y_true= words2IOBES(Y), average=self.f_type, scheme=IOBES,mode='strict')
         #torch.save(self.model, self.filepath +"/last_model.pt")
 
         F_type = global_param.traning_param['F_type']
@@ -63,8 +66,9 @@ class ModelCheckpoint:
             if (not self.save):
                 self.best_model = copy.deepcopy(self.model)
             else:
+                print("save new model")
                 torch.save(self.model,self.filepath+"/best_model.pt")
-            report = classification_report(y_pred=pred, y_true=Y)
+            report = classification_report(y_pred= words2IOBES(pred), y_true= words2IOBES(Y),scheme=IOBES,mode='strict')
 
             self.best_f=f
 

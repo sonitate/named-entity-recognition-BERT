@@ -2,6 +2,7 @@ from itertools import chain
 
 import torch
 from tqdm import tqdm
+
 from Load_data import torch_loader
 
 from Checkpoint import ModelCheckpoint, save_path
@@ -92,6 +93,7 @@ def train_save(model,X_app,Y_app,nb_epoch=30,batch_size=10,X_valid=[],Y_valid=[]
     for i in range(nb_epoch):
        loss ,acc = train(model,loader_app, f_loss, optimizer)
        pred=prediction(model,X_valid)
-       checkpoint.update(list(chain.from_iterable(pred)),list(chain.from_iterable(Y_valid)),i,loss,acc,do_valid=do_valid)
+       checkpoint.update(pred, Y_valid, i, loss, acc,do_valid=do_valid)
+       #checkpoint.update(list(chain.from_iterable(pred)),list(chain.from_iterable(Y_valid)),i,loss,acc,do_valid=do_valid)
 
     return checkpoint.get_best_model(),checkpoint.filepath

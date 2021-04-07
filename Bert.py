@@ -11,16 +11,16 @@ def get_bert(bert_type='bert',num_labels=11):
     if (bert_type == 'bert'):
         ######## bert ###########
 
-        tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+        tokenizer = BertTokenizer.from_pretrained('bert-base-cased',do_lower_case=False)
         model = BertForTokenClassification.from_pretrained('bert-base-cased', num_labels=num_labels)
 
         ########################
 
     if (bert_type == 'scibert'):
         #### sci bert #########
-        config = AutoConfig.from_pretrained('allenai/scibert_scivocab_uncased', output_hidden_states=False, num_labels=num_labels)
-        tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
-        model = AutoModelForTokenClassification.from_pretrained('allenai/scibert_scivocab_uncased', config=config)
+        config = AutoConfig.from_pretrained('allenai/scibert_scivocab_cased', output_hidden_states=False, num_labels=num_labels)
+        tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_cased',do_lower_case=False)
+        model = AutoModelForTokenClassification.from_pretrained('allenai/scibert_scivocab_cased', config=config)
 
         #######################
 
