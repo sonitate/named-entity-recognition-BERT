@@ -12,6 +12,7 @@ from itertools import chain
 
 corpus=Corpus('data/PGxCorpus','pgx')
 X_app,Y_app, Tokens= corpus.get_data()
+print(len(Y_app))
 
 ###### param sup #######
 do_valid=False
@@ -28,11 +29,12 @@ exp_name= global_param.traning_param['exp_tag']
 machine_name = os.uname()[1]
 
 #X_valid,Y_valid, Tokens=corpus.data
-print(len(Y_app))
+#X_test,Y_test,Tokens=corpus.data
 
-X_valid,Y_valid=X_app[:100],Y_app[:100] #corpus.data
-X_test,Y_test=X_app[:100],Y_app[:100] #corpus.data
-X_app,Y_app,Tokens=X_app[100:],Y_app[100:],Tokens[100:]
+X_valid,Y_valid=X_app[:100],Y_app[:100]
+X_test,Y_test=X_app[:100],Y_app[:100]
+
+X_app,Y_app=X_app[100:],Y_app[100:]
 
 global_param.model_param['bert']
 
