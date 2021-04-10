@@ -78,6 +78,10 @@ def load_ann(ann_path):
     return labels
 
 
+def pointer_step(pointer,token,sent):
+    return len(sent[:pointer])+sent[pointer:].find(token.replace('#',''))
+
+
 def brat(path):
     ann_txt_files = [(f.split(path)[1], (f.split(path)[1]).split('ann')[0] + "txt") for f in glob.glob(path + "/*.ann")]
 
@@ -91,6 +95,7 @@ def brat(path):
         labels = load_ann(path + ann)
         tokens = tokenizer.tokenize(sentence)
         # E range shift
+        """
         for w in range(len(sentence)):
             if(sentence[w]==' '):
                for l in labels:
@@ -98,22 +103,21 @@ def brat(path):
                      l[0][1]-=1
                  if w <l[0][0] :
                      l[0][0]-=1
-                     l[0][1]-=1
+                     l[0][1]-=1"""
 
-
+        print(labels)
         target = [0]*len(tokens)
         pointer=0
         i=0
         for t in tokens :
+            pointer=pointer_step(pointer,t,sentence)
             for l in labels:
-                if pointer in range(l[0][0], l[0][1]) and l[1]>target[i]:
+                if pointer in range(l[0][0], l[0][1]+1) and l[1]>target[i]:
                     target[i]=l[1]
-            pointer+=len(t.replace('#', ''))
             i+=1
 
         Dataset_X.append(get_bert_inputs(sentence))
-        Dataset_Y.append([0]+target+[0])
-        Dataset_Tokens.append(tokens)
+        Dataset_Y.append(target)
         Dataset_Tokens.append(tokens)
 
     return Dataset_X, Dataset_Y, Dataset_Tokens
