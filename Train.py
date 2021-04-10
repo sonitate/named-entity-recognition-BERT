@@ -9,6 +9,8 @@ from Checkpoint import ModelCheckpoint, save_path
 from Parameters import global_param
 import random
 
+import torch.nn.functional as F
+
 
 def train(model, loader,f_loss, optimizer):
 
@@ -65,7 +67,8 @@ def prediction(model,X):
         with torch.no_grad():
             model.eval()
             output = model(input)
-            predicted_targets = output[0].argmax(dim=2)
+            #predicted_targets = output[0].argmax(dim=2)
+            predicted_targets=torch.argmax(F.log_softmax(output[0],dim=2),dim=2)
             Y.append(predicted_targets.tolist()[0])
         pbar.update(1)
         continue

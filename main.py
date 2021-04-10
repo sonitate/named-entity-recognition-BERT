@@ -14,9 +14,9 @@ corpus=Corpus('data/PGxCorpus','pgx')
 X_app,Y_app, Tokens= corpus.get_data()
 
 ###### param sup #######
-do_valid=True
+do_valid=False
 fold_num=10
-do_cross_valid=False#True
+do_cross_valid=False
 
 nb_epoch =global_param.traning_param['num_ep'] # 5
 lr= global_param.traning_param['lr'] # 3e-5
@@ -27,8 +27,12 @@ exp_name= global_param.traning_param['exp_tag']
 
 machine_name = os.uname()[1]
 
-X_valid,Y_valid, Tokens=corpus.data
-X_test,Y_test,Tokens=corpus.data
+#X_valid,Y_valid, Tokens=corpus.data
+print(len(Y_app))
+
+X_valid,Y_valid=X_app[:100],Y_app[:100] #corpus.data
+X_test,Y_test=X_app[:100],Y_app[:100] #corpus.data
+X_app,Y_app,Tokens=X_app[100:],Y_app[100:],Tokens[100:]
 
 global_param.model_param['bert']
 
@@ -70,7 +74,7 @@ def Experence():
 
         pred, true = Cross_validation.cross_validation(train_param, train_save, fold_num)
 
-    pred_e, true_e= words2IOBES(word_level(pred, Tokens)), words2IOBES(word_level(true, Tokens))
+    pred_e, true_e= words2IOBES(pred), words2IOBES(true)
 
     #pred_entities,true_entities=entity_level(pred_words,Y_words)
 

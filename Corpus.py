@@ -4,6 +4,7 @@ import string
 import jsonlines
 import csv
 import torch
+import random
 
 from Embedding import Text2tokens, tokenizer, get_bert_inputs
 
@@ -81,6 +82,10 @@ def load_ann(ann_path):
 def brat(path):
     ann_txt_files = [(f.split(path)[1], (f.split(path)[1]).split('ann')[0] + "txt") for f in glob.glob(path + "/*.ann")]
 
+    random.shuffle(ann_txt_files)
+
+    
+
     Dataset_X = []
     Dataset_Y = []
     Dataset_Tokens = []
@@ -114,7 +119,7 @@ def brat(path):
         Dataset_X.append(get_bert_inputs(sentence))
         Dataset_Y.append([0]+target+[0])
         Dataset_Tokens.append(tokens)
-        Dataset_Tokens.append(tokens)
+        
 
     return Dataset_X, Dataset_Y, Dataset_Tokens
 
