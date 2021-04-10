@@ -50,7 +50,7 @@ def Experence():
             'nb_epoch': nb_epoch,
             'F_type': F_type,
             'lr': lr,
-            'do_valid': False
+            'do_valid': True
         }
 
 

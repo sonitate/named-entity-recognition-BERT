@@ -88,8 +88,6 @@ def brat(path):
 
     random.shuffle(ann_txt_files)
 
-    
-
     Dataset_X = []
     Dataset_Y = []
     Dataset_Tokens = []
@@ -110,7 +108,6 @@ def brat(path):
                      l[0][0]-=1
                      l[0][1]-=1"""
 
-        print(labels)
         target = [0]*len(tokens)
         pointer=0
         i=0
@@ -122,7 +119,7 @@ def brat(path):
             i+=1
 
         Dataset_X.append(get_bert_inputs(sentence))
-        Dataset_Y.append(target)
+        Dataset_Y.append([0]+target+[0])
         Dataset_Tokens.append(tokens)
 
     return Dataset_X, Dataset_Y, Dataset_Tokens
