@@ -17,7 +17,7 @@ print(len(Y_app))
 ###### param sup #######
 do_valid=False
 fold_num=10
-do_cross_valid=False
+do_cross_valid=True
 
 nb_epoch =global_param.traning_param['num_ep'] # 5
 lr= global_param.traning_param['lr'] # 3e-5
@@ -28,13 +28,9 @@ exp_name= global_param.traning_param['exp_tag']
 
 machine_name = os.uname()[1]
 
-#X_valid,Y_valid, Tokens=corpus.data
-#X_test,Y_test,Tokens=corpus.data
+X_valid,Y_valid=[],[]
+X_test,Y_test=[],[]
 
-X_valid,Y_valid=X_app[:100],Y_app[:100]
-X_test,Y_test=X_app[:100],Y_app[:100]
-
-X_app,Y_app=X_app[100:],Y_app[100:]
 
 global_param.model_param['bert']
 
@@ -50,7 +46,7 @@ def Experence():
             'nb_epoch': nb_epoch,
             'F_type': F_type,
             'lr': lr,
-            'do_valid': True
+            'do_valid':do_valid
         }
 
 
