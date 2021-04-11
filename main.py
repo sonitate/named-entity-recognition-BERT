@@ -10,7 +10,8 @@ from Parameters import global_param
 from Train import train_save, prediction
 from itertools import chain
 
-corpus=Corpus('data/PGxCorpus','pgx')
+head =global_param.model_param['head']
+corpus=Corpus('data/PGxCorpus','pgx',head=head)
 X_app,Y_app, Tokens= corpus.get_data()
 print(len(Y_app))
 
