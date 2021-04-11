@@ -9,6 +9,8 @@ from Checkpoint import ModelCheckpoint, save_path
 from Parameters import global_param
 import random
 
+import torch.nn.functional as F
+
 
 def train(model, loader,f_loss, optimizer):
 
@@ -31,8 +33,10 @@ def train(model, loader,f_loss, optimizer):
 
         #print(outputs[0].permute(0,2,1).size())
         #print(targets.size())
+        #print(outputs.size())
 
         loss = f_loss(outputs[0].permute(0,2,1), targets)
+        #loss = f_loss(outputs.permute(0,2,1), targets)
 
         optimizer.zero_grad()
 
@@ -45,6 +49,7 @@ def train(model, loader,f_loss, optimizer):
         N+=targets.size(0)*targets.size(1)
         tot_loss += targets.size(0)*targets.size(1)*loss.item()
         predicted_targets = outputs[0].argmax(dim=2)
+        #predicted_targets = outputs.argmax(dim=2)
         correct +=(predicted_targets==targets).sum().item()
 
 
@@ -66,6 +71,8 @@ def prediction(model,X):
             model.eval()
             output = model(input)
             predicted_targets = output[0].argmax(dim=2)
+            #predicted_targets = output.argmax(dim=2)
+            #predicted_targets=torch.argmax(F.log_softmax(output[0],dim=2),dim=2)
             Y.append(predicted_targets.tolist()[0])
         pbar.update(1)
         continue
@@ -74,7 +81,7 @@ def prediction(model,X):
 
 
 
-def train_save(model,X_app,Y_app,nb_epoch=30,batch_size=10,X_valid=[],Y_valid=[],F_type='macro',lr= 0.001,do_valid=True):
+def train_save(model,X_app,Y_app,nb_epoch=30,batch_size=32,X_valid=[],Y_valid=[],F_type='macro',lr= 0.001,do_valid=True):
 
 
     if(len(Y_valid)==0):

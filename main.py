@@ -10,14 +10,15 @@ from Parameters import global_param
 from Train import train_save, prediction
 from itertools import chain
 
-corpus=Corpus('data/PGxCorpus','pgx')
+head =global_param.model_param['head']
+corpus=Corpus('data/PGxCorpus','pgx',head=head)
 X_app,Y_app, Tokens= corpus.get_data()
 print(len(Y_app))
 
 ###### param sup #######
-do_valid=True
+do_valid=False
 fold_num=10
-do_cross_valid=False#True
+do_cross_valid=False
 
 nb_epoch =global_param.traning_param['num_ep'] # 5
 lr= global_param.traning_param['lr'] # 3e-5
@@ -50,7 +51,7 @@ def Experence():
             'nb_epoch': nb_epoch,
             'F_type': F_type,
             'lr': lr,
-            'do_valid': False
+            'do_valid': True
         }
 
 

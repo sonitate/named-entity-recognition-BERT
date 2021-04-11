@@ -20,6 +20,9 @@ class Hyperparameter :
                             dest='bert',
                             help='Bert model : bert, biobert, scibert')
 
+        parser.add_argument('-head', default='all', choices=['all','gen','chem','phen'],
+                            dest='head',
+                            help='The head of NER model')
 
         parser.add_argument('-F_type', default='macro', choices=['micro','macro'],
                             dest='F_type',
@@ -37,7 +40,8 @@ class Hyperparameter :
 
 
         self.model_param={
-        'bert': param.bert
+        'bert': param.bert,
+        'head' : param.head
         }
 
         self.corpus_param={
@@ -47,6 +51,7 @@ class Hyperparameter :
 
         method='fine_tuning'
         method+='_'+self.model_param['bert']
+        method+='_' + self.model_param['head']
         method+='_'+self.corpus_param['corpus']
         
 

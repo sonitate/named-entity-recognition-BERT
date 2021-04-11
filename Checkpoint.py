@@ -31,7 +31,7 @@ def generate_unique_logpath(logdir, raw_run_name):
 class ModelCheckpoint:
 
 
-    def __init__(self,filepath,model,F_type='macro',save=True):
+    def __init__(self,filepath,model,F_type='macro',save=False):
 
         #self.min_loss = None
         self.best_f=None
