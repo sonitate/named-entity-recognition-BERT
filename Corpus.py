@@ -10,13 +10,11 @@ from Embedding import Text2tokens, tokenizer, get_bert_inputs
 
 Entity_types={
 'Chemical' : 1,
-
 'Genomic_factor' : 2 ,
 'Gene_or_protein' : 3 ,
 'Genomic_variation' : 4 ,
 'Limited_variation' : 5 ,
 'Haplotype' : 6 ,
-
 'Phenotype' : 7 ,
 'Disease' : 8 ,
 'Pharmacodynamic_phenotype': 9 ,
@@ -30,7 +28,7 @@ labels_ranges={
    'all':range(11)
 }
 
-
+shift=0
 def head_label(label,head):
     if label in labels_ranges[head]:
         return 1+label-labels_ranges[head][0]
@@ -102,6 +100,9 @@ def pointer_step(pointer,token,sent):
 
 
 def brat(path,head):
+    global shift
+    shift=labels_ranges[head][0]
+
     ann_txt_files = [(f.split(path)[1], (f.split(path)[1]).split('ann')[0] + "txt") for f in glob.glob(path + "/*.ann")]
 
     random.shuffle(ann_txt_files)
@@ -143,24 +144,25 @@ def brat(path,head):
 
     return Dataset_X, Dataset_Y, Dataset_Tokens
 
-
+def headc(label):
+    return 0 if label==0 else label+shift
 
 def words2IOBES(words_labels_dataset):
     iobes_dataset=[]
     for words in words_labels_dataset:
-        iobes=[classes[words[0]] if words[0]==0 else 'B-'+classes[words[0]]]
+        iobes=[classes[headc(words[0])] if words[0]==0 else 'B-'+classes[headc(words[0])]]
         for i in range(1,len(words)-1):
             if(words[i]==0):
-                iobes.append(classes[words[i]])
+                iobes.append(classes[headc(words[i])])
             elif(words[i-1]!=words[i]):
-                iobes.append('B-'+classes[words[i]])
+                iobes.append('B-'+classes[headc(words[i])])
             elif(words[i+1]!=words[i]):
-                iobes.append('E-'+classes[words[i]])
+                iobes.append('E-'+classes[headc(words[i])])
             else:
-                iobes.append('I-'+classes[words[i]])
+                iobes.append('I-'+classes[headc(words[i])])
 
         prefix='E-' if words[-1]==words[-2] else 'B-'
-        iobes.append(classes[words[-1]] if words[-1]==0 else prefix + classes[words[-1]])
+        iobes.append(classes[headc(words[-1])] if words[-1]==0 else prefix + classes[headc(words[-1])])
         iobes_dataset.append(iobes)
     return iobes_dataset
 
@@ -175,6 +177,7 @@ class Corpus():
         self.name = name
         self.data = None
         self.head = head
+
 
     def get_data(self):
         if self.name == 'pgx':
