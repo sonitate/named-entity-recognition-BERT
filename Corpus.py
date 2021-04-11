@@ -89,6 +89,9 @@ def brat(path):
     Dataset_Y = []
     Dataset_Tokens = []
 
+    n = 0
+    cases={}
+
     for ann, txt in ann_txt_files:
 
         sentence = load_txt(path + txt)
@@ -105,20 +108,29 @@ def brat(path):
                      l[0][0]-=1
                      l[0][1]-=1"""
 
-        print(labels)
         target = [0]*len(tokens)
         pointer=0
         i=0
         for t in tokens :
             pointer=pointer_step(pointer,t,sentence)
             for l in labels:
+                if pointer in range(l[0][0], l[0][1] + 1) and l[1]!=target[i] and target[i] > 0:
+                    cases[str(target[i])+str(l[1])]=0
+                    print(target[i],l[1])
+                    n+=1
                 if pointer in range(l[0][0], l[0][1]+1) and l[1]>target[i]:
                     target[i]=l[1]
+
+
             i+=1
 
         Dataset_X.append(get_bert_inputs(sentence))
         Dataset_Y.append(target)
         Dataset_Tokens.append(tokens)
+
+    print("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN", n)
+    print(cases)
+    print(len(cases)/2)
 
     return Dataset_X, Dataset_Y, Dataset_Tokens
 
