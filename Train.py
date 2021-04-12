@@ -13,6 +13,9 @@ import torch.nn.functional as F
 
 
 def train(model, loader,f_loss, optimizer):
+    
+    
+    model.to(global_param.device)
 
     model.train()
 
@@ -68,6 +71,7 @@ def prediction(model,X):
         input=torch.stack([x])
         input=input.to(global_param.device)
         with torch.no_grad():
+            model.to(global_param.device)
             model.eval()
             output = model(input)
             predicted_targets = output[0].argmax(dim=2)

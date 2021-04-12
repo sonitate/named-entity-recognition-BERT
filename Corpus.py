@@ -145,7 +145,7 @@ def brat(path,head):
     return Dataset_X, Dataset_Y, Dataset_Tokens
 
 def headc(label):
-    return 0 if label==0 else label+shift
+    return 0 if label==0 else label+shift-1
 
 def words2IOBES(words_labels_dataset):
     iobes_dataset=[]

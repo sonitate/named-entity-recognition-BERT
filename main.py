@@ -16,9 +16,9 @@ X_app,Y_app, Tokens= corpus.get_data()
 print(len(Y_app))
 
 ###### param sup #######
-do_valid=False
+do_valid=True
 fold_num=10
-do_cross_valid=True
+do_cross_valid=False
 
 nb_epoch =global_param.traning_param['num_ep'] # 5
 lr= global_param.traning_param['lr'] # 3e-5
@@ -37,8 +37,9 @@ global_param.model_param['bert']
 
 def Experence():
     _,model=Bert.get_bert(bert_type=bert_type)
+    
     model.to(global_param.device)
-
+    
 
     train_param = {
             'model': model,
