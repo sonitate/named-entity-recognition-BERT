@@ -1,0 +1,228 @@
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.76      0.79      0.77       771
+   Genomic_factor       0.24      0.13      0.17        31
+Genomic_variation       0.15      0.13      0.14        52
+        Haplotype       0.73      0.79      0.75       131
+Limited_variation       0.63      0.68      0.65       869
+
+        micro avg       0.67      0.71      0.69      1854
+        macro avg       0.50      0.50      0.50      1854
+     weighted avg       0.67      0.71      0.69      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.79      0.79      0.79       771
+   Genomic_factor       0.14      0.03      0.05        31
+Genomic_variation       0.21      0.19      0.20        52
+        Haplotype       0.79      0.76      0.78       131
+Limited_variation       0.63      0.68      0.66       869
+
+        micro avg       0.69      0.71      0.70      1854
+        macro avg       0.51      0.49      0.50      1854
+     weighted avg       0.69      0.71      0.70      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.79      0.82      0.80       771
+   Genomic_factor       0.00      0.00      0.00        31
+Genomic_variation       0.16      0.17      0.17        52
+        Haplotype       0.71      0.77      0.74       131
+Limited_variation       0.63      0.68      0.65       869
+
+        micro avg       0.68      0.72      0.70      1854
+        macro avg       0.46      0.49      0.47      1854
+     weighted avg       0.68      0.72      0.70      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.79      0.78      0.79       771
+   Genomic_factor       0.07      0.03      0.04        31
+Genomic_variation       0.20      0.13      0.16        52
+        Haplotype       0.79      0.79      0.79       131
+Limited_variation       0.61      0.67      0.64       869
+
+        micro avg       0.68      0.70      0.69      1854
+        macro avg       0.49      0.48      0.48      1854
+     weighted avg       0.68      0.70      0.69      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.77      0.78      0.77       771
+   Genomic_factor       0.07      0.03      0.04        31
+Genomic_variation       0.27      0.19      0.22        52
+        Haplotype       0.71      0.76      0.74       131
+Limited_variation       0.63      0.68      0.66       869
+
+        micro avg       0.68      0.70      0.69      1854
+        macro avg       0.49      0.49      0.49      1854
+     weighted avg       0.68      0.70      0.69      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.80      0.78      0.79       771
+   Genomic_factor       0.19      0.10      0.13        31
+Genomic_variation       0.15      0.12      0.13        52
+        Haplotype       0.73      0.76      0.75       131
+Limited_variation       0.63      0.68      0.66       869
+
+        micro avg       0.69      0.70      0.70      1854
+        macro avg       0.50      0.49      0.49      1854
+     weighted avg       0.69      0.70      0.70      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.80      0.79      0.80       771
+   Genomic_factor       0.06      0.03      0.04        31
+Genomic_variation       0.21      0.17      0.19        52
+        Haplotype       0.75      0.76      0.75       131
+Limited_variation       0.63      0.71      0.67       869
+
+        micro avg       0.69      0.72      0.71      1854
+        macro avg       0.49      0.49      0.49      1854
+     weighted avg       0.69      0.72      0.70      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.76      0.81      0.78       771
+   Genomic_factor       0.18      0.06      0.10        31
+Genomic_variation       0.15      0.13      0.14        52
+        Haplotype       0.75      0.72      0.73       131
+Limited_variation       0.63      0.68      0.65       869
+
+        micro avg       0.68      0.71      0.69      1854
+        macro avg       0.49      0.48      0.48      1854
+     weighted avg       0.67      0.71      0.69      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.79      0.82      0.80       771
+   Genomic_factor       0.09      0.03      0.05        31
+Genomic_variation       0.19      0.15      0.17        52
+        Haplotype       0.71      0.76      0.73       131
+Limited_variation       0.62      0.68      0.65       869
+
+        micro avg       0.69      0.72      0.70      1854
+        macro avg       0.48      0.49      0.48      1854
+     weighted avg       0.68      0.72      0.70      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.78      0.78      0.78       771
+   Genomic_factor       0.17      0.13      0.15        31
+Genomic_variation       0.15      0.15      0.15        52
+        Haplotype       0.77      0.80      0.79       131
+Limited_variation       0.62      0.68      0.65       869
+
+        micro avg       0.68      0.71      0.69      1854
+        macro avg       0.50      0.51      0.50      1854
+     weighted avg       0.68      0.71      0.69      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.78      0.79      0.78       771
+   Genomic_factor       0.17      0.03      0.05        31
+Genomic_variation       0.18      0.13      0.16        52
+        Haplotype       0.74      0.79      0.77       131
+Limited_variation       0.62      0.67      0.65       869
+
+        micro avg       0.69      0.70      0.70      1854
+        macro avg       0.50      0.48      0.48      1854
+     weighted avg       0.68      0.70      0.69      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.78      0.79      0.78       771
+   Genomic_factor       0.17      0.06      0.09        31
+Genomic_variation       0.22      0.23      0.23        52
+        Haplotype       0.75      0.75      0.75       131
+Limited_variation       0.61      0.66      0.64       869
+
+        micro avg       0.67      0.70      0.69      1854
+        macro avg       0.51      0.50      0.50      1854
+     weighted avg       0.67      0.70      0.68      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.76      0.79      0.78       771
+   Genomic_factor       0.10      0.03      0.05        31
+Genomic_variation       0.14      0.10      0.11        52
+        Haplotype       0.78      0.76      0.77       131
+Limited_variation       0.63      0.68      0.65       869
+
+        micro avg       0.68      0.71      0.69      1854
+        macro avg       0.48      0.47      0.47      1854
+     weighted avg       0.67      0.71      0.69      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.80      0.80      0.80       771
+   Genomic_factor       0.07      0.03      0.04        31
+Genomic_variation       0.13      0.13      0.13        52
+        Haplotype       0.72      0.76      0.74       131
+Limited_variation       0.63      0.68      0.65       869
+
+        micro avg       0.68      0.71      0.70      1854
+        macro avg       0.47      0.48      0.47      1854
+     weighted avg       0.68      0.71      0.69      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.78      0.79      0.79       771
+   Genomic_factor       0.11      0.06      0.08        31
+Genomic_variation       0.18      0.13      0.15        52
+        Haplotype       0.75      0.74      0.74       131
+Limited_variation       0.64      0.69      0.66       869
+
+        micro avg       0.69      0.71      0.70      1854
+        macro avg       0.49      0.48      0.49      1854
+     weighted avg       0.68      0.71      0.70      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.79      0.77      0.78       771
+   Genomic_factor       0.15      0.06      0.09        31
+Genomic_variation       0.19      0.15      0.17        52
+        Haplotype       0.77      0.81      0.79       131
+Limited_variation       0.61      0.67      0.64       869
+
+        micro avg       0.68      0.70      0.69      1854
+        macro avg       0.50      0.49      0.49      1854
+     weighted avg       0.68      0.70      0.69      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.79      0.80      0.80       771
+   Genomic_factor       0.27      0.13      0.17        31
+Genomic_variation       0.15      0.13      0.14        52
+        Haplotype       0.76      0.79      0.78       131
+Limited_variation       0.63      0.69      0.66       869
+
+        micro avg       0.69      0.72      0.70      1854
+        macro avg       0.52      0.51      0.51      1854
+     weighted avg       0.69      0.72      0.70      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.77      0.81      0.79       771
+   Genomic_factor       0.11      0.06      0.08        31
+Genomic_variation       0.18      0.15      0.16        52
+        Haplotype       0.77      0.82      0.79       131
+Limited_variation       0.63      0.68      0.65       869
+
+        micro avg       0.68      0.72      0.70      1854
+        macro avg       0.49      0.50      0.50      1854
+     weighted avg       0.68      0.72      0.70      1854
+
+                   precision    recall  f1-score   support
+
+  Gene_or_protein       0.77      0.80      0.78       771
+   Genomic_factor       0.08      0.03      0.05        31
+Genomic_variation       0.19      0.17      0.18        52
+        Haplotype       0.68      0.73      0.70       131
+Limited_variation       0.66      0.69      0.67       869
+
+        micro avg       0.69      0.71      0.70      1854
+        macro avg       0.47      0.48      0.48      1854
+     weighted avg       0.68      0.71      0.70      1854
+
