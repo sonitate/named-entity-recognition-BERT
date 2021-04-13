@@ -75,6 +75,7 @@ class Hyperparameter :
         else:
             print("°°°°°°°°°°°°°°°°°°°°  CPU  °°°°°°°°°°°°°°°°°°")
             self.device = torch.device('cpu')
+            
 
 
 

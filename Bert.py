@@ -12,7 +12,7 @@ def get_bert(bert_type='bert',num_labels=11):
         ######## bert ###########
 
         tokenizer = BertTokenizer.from_pretrained('bert-base-cased',do_lower_case=False)
-        model = BertForTokenClassification.from_pretrained('bert-base-cased', num_labels=num_labels)
+        model = BertForTokenClassification.from_pretrained('bert-base-cased',num_labels=num_labels)
 
         ########################
 

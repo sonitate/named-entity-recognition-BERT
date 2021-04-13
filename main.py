@@ -18,7 +18,7 @@ print(len(Y_app))
 ###### param sup #######
 do_valid=True
 fold_num=10
-do_cross_valid=False
+do_cross_valid=True
 
 nb_epoch =global_param.traning_param['num_ep'] # 5
 lr= global_param.traning_param['lr'] # 3e-5

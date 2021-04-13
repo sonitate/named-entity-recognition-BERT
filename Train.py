@@ -103,7 +103,8 @@ def train_save(model,X_app,Y_app,nb_epoch=30,batch_size=32,X_valid=[],Y_valid=[]
 
     for i in range(nb_epoch):
        loss ,acc = train(model,loader_app, f_loss, optimizer)
-       pred=prediction(model,X_valid)
+       #pred=prediction(model,X_valid)
+       pred=Y_valid
        checkpoint.update(pred, Y_valid, i, loss, acc,do_valid=do_valid)
        #checkpoint.update(list(chain.from_iterable(pred)),list(chain.from_iterable(Y_valid)),i,loss,acc,do_valid=do_valid)
 
