@@ -25,7 +25,7 @@ labels_ranges={
    'chem':[1],
    'gen':range(2,7),
    'phen':range(7,11),
-   'all':range(11)
+   'all':range(1,11)
 }
 
 shift=0
@@ -99,6 +99,16 @@ def pointer_step(pointer,token,sent):
     return len(sent[:pointer])+sent[pointer:].find(token.replace('#',''))
 
 
+def label_level(labels,label):
+    level=-1
+    lb,hb=label[0][0],label[0][1]
+    for l in labels:
+        if(lb>=l[0][0] and hb<=l[0][1]):
+           level+=1
+           if(level==2):
+               break
+    return level
+
 def brat(path,head):
     global shift
     shift=labels_ranges[head][0]
@@ -116,31 +126,31 @@ def brat(path,head):
         sentence = load_txt(path+txt)
         labels = load_ann(path+ann,head=head)
         tokens = tokenizer.tokenize(sentence)
-        # E range shift
-        """
-        for w in range(len(sentence)):
-            if(sentence[w]==' '):
-               for l in labels:
-                 if w in range(l[0][0], l[0][1]):
-                     l[0][1]-=1
-                 if w <l[0][0] :
-                     l[0][0]-=1
-                     l[0][1]-=1"""
 
-        target = [0]*len(tokens)
+        target = [[0] * len(tokens) for i in range(3)]
         pointer=0
         i=0
         for t in tokens :
             pointer=pointer_step(pointer,t,sentence)
             for l in labels:
-                if pointer in range(l[0][0], l[0][1]+1) and l[1]>target[i]:
-                    target[i]=l[1]
+                level=label_level(labels,l)
+                if pointer in range(l[0][0], l[0][1]+1):
+                    target[level][i]=l[1]
 
             i+=1
 
         Dataset_X.append(get_bert_inputs(sentence))
-        Dataset_Y.append([0]+target+[0])
+        Dataset_Y.append([0]+target[0]+[0]+[0]+target[1]+[0]+[0]+target[2]+[0])
         Dataset_Tokens.append(tokens)
+
+        """
+        print('##########################')
+        print(txt)
+        print(target[0])
+        print(target[1])
+        print(target[2])
+        print('##########################\n\n\n')
+        """
 
     return Dataset_X, Dataset_Y, Dataset_Tokens
 

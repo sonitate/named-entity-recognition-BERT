@@ -6,6 +6,7 @@ from seqeval.scheme import IOBES
 import Bert
 import Cross_validation
 from Corpus import Corpus,words2IOBES
+from Model import BertRecNER
 from Parameters import global_param
 from Train import train_save, prediction
 from itertools import chain
@@ -36,7 +37,9 @@ X_test,Y_test=[],[]
 global_param.model_param['bert']
 
 def Experence():
-    _,model=Bert.get_bert(bert_type=bert_type)
+    #_,model=Bert.get_bert(bert_type=bert_type)
+
+    model=BertRecNER(bert_type=bert_type)
     
     model.to(global_param.device)
     

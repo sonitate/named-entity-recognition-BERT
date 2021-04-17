@@ -38,8 +38,8 @@ def train(model, loader,f_loss, optimizer):
         #print(targets.size())
         #print(outputs.size())
 
-        loss = f_loss(outputs[0].permute(0,2,1), targets)
-        #loss = f_loss(outputs.permute(0,2,1), targets)
+        #loss = f_loss(outputs[0].permute(0,2,1), targets)
+        loss = f_loss(outputs.permute(0,2,1), targets)
 
         optimizer.zero_grad()
 
@@ -51,8 +51,8 @@ def train(model, loader,f_loss, optimizer):
 
         N+=targets.size(0)*targets.size(1)
         tot_loss += targets.size(0)*targets.size(1)*loss.item()
-        predicted_targets = outputs[0].argmax(dim=2)
-        #predicted_targets = outputs.argmax(dim=2)
+        #predicted_targets = outputs[0].argmax(dim=2)
+        predicted_targets = outputs.argmax(dim=2)
         correct +=(predicted_targets==targets).sum().item()
 
 
@@ -74,8 +74,8 @@ def prediction(model,X):
             model.to(global_param.device)
             model.eval()
             output = model(input)
-            predicted_targets = output[0].argmax(dim=2)
-            #predicted_targets = output.argmax(dim=2)
+            #predicted_targets = output[0].argmax(dim=2)
+            predicted_targets = output.argmax(dim=2)
             #predicted_targets=torch.argmax(F.log_softmax(output[0],dim=2),dim=2)
             Y.append(predicted_targets.tolist()[0])
         pbar.update(1)
