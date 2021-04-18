@@ -25,9 +25,15 @@ class BertRecNER(nn.Module):
     def __init__(self, out=11, bert_type='bert'):
         super(BertRecNER, self).__init__()
         _, self.bert_model = Bert.get_bert(bert_type=bert_type)
-        self.level1=SeqClassifier()
-        self.level2=SeqClassifier(emb_size=768+out)
-        self.level3=SeqClassifier(emb_size=768+out)
+
+        #self.level1=SeqClassifier()
+        #self.level2=SeqClassifier(emb_size=768+out)
+        #self.level3=SeqClassifier(emb_size=768+out)
+
+        self.level1=nn.Linear(768,out)
+        self.level2=nn.Linear(768+out,out)
+        self.level3=nn.Linear(768+out,out)
+
 
     def forward(self, x):
         rep_vects, _ = self.bert_model(x)
