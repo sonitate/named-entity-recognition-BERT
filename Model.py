@@ -20,6 +20,18 @@ class SeqClassifier(nn.Module):
         logits,_ = self.classifier(x)
         return logits
 
+class MLP(nn.Module):
+    def __init__(self,inputs=768,H=200,out=11):
+        super(MLP,self).__init__()
+        self.l1=nn.Linear(inputs,H)
+        self.l2=nn.Linear(H,out)
+    
+    def forward(self, x):
+        x=self.l1(x)
+        x=self.l2(x)
+        return x
+
+
 
 class BertRecNER(nn.Module):
     def __init__(self, out=11, bert_type='bert'):
@@ -30,10 +42,14 @@ class BertRecNER(nn.Module):
         #self.level2=SeqClassifier(emb_size=768+out)
         #self.level3=SeqClassifier(emb_size=768+out)
 
-        self.level1=nn.Linear(768,out)
-        self.level2=nn.Linear(768+out,out)
-        self.level3=nn.Linear(768+out,out)
+        #self.level1=nn.Linear(768,out)
+        #self.level2=nn.Linear(768+out,out)
+        #self.level3=nn.Linear(768+out,out)
 
+
+        self.level1=MLP(inputs=768)
+        self.level2=MLP(inputs=768+out)
+        self.level3=MLP(inputs=768+out)
 
     def forward(self, x):
         rep_vects, _ = self.bert_model(x)
@@ -50,5 +66,6 @@ class BertRecNER(nn.Module):
         level3_logits = self.level3(level3_inputs)
 
         outputs=torch.cat((level1_logits, level2_logits, level3_logits),dim=1)
+
 
         return outputs
