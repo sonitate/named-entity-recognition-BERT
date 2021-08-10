@@ -85,14 +85,14 @@ def prediction(model,X):
 
 
 
-def train_save(model,X_app,Y_app,nb_epoch=30,batch_size=32,X_valid=[],Y_valid=[],F_type='macro',lr= 0.001,do_valid=True):
+def train_save(model,X_app,Y_app,nb_epoch=30,batch_size=32,X_valid=[],Y_valid=[],F_type='macro',lr= 0.001,do_valid=True,save=False):
 
 
     if(len(Y_valid)==0):
         X_valid,Y_valid=X_app,Y_app
 
     path = save_path()
-    checkpoint = ModelCheckpoint(path, model,F_type=F_type)
+    checkpoint = ModelCheckpoint(path, model,F_type=F_type,save=save)
 
 
     loader_app = torch_loader(X_app,Y_app,batch_size=batch_size)

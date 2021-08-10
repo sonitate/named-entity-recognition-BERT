@@ -36,6 +36,8 @@ class Hyperparameter :
                             dest='num_ep',
                             help='number of epochs ( 5/8 : for fine tuning ) / (30/ 60) for frozen ')
 
+        parser.add_argument('--save', default=False, action='store_true',help='add --save to save the model into folder,default False')
+
         param = parser.parse_args()
 
 
@@ -60,11 +62,13 @@ class Hyperparameter :
         'batch_size':32,
         'F_type':param.F_type,
         'exp_tag':method,
-        'lr':param.lr
+        'lr':param.lr,
+        'save':param.save
         }
         
         method+='_ep'+str(self.traning_param['num_ep'])
         method+='_lr'+str(self.traning_param['lr'])
+        method+='_save'+str(self.traning_param['save'])
         self.traning_param['exp_tag']=method
         print(method)
 

@@ -13,6 +13,9 @@ For running an experience run the main code on an CPU or GPU device with the acc
 * With SciBERT
 `$ python3 main.py -bert scibert -F_type macro -lr 3e-5 -num_ep 10`
 
+* To save the model into a folder, add "--save"
+e.g `$ python3 main.py -bert bert -F_type macro -lr 3e-5 -num_ep 10 --save`
+
 The resulst of one experience should look like this :  
 ```
               precision    recall  f1-score   support
@@ -61,4 +64,3 @@ fscore     0.637523  0.663320  0.649737  0.007154
 ```
 
 <img src="https://drive.google.com/uc?export=view&id=1606-ORWH1a4YAPgLyj_hrcvwknzuZGTp" width="500" height="300">
-

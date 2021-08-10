@@ -25,7 +25,9 @@ nb_epoch =global_param.traning_param['num_ep'] # 5
 lr= global_param.traning_param['lr'] # 3e-5
 bert_type= global_param.model_param['bert'] # 'bert'
 F_type= global_param.traning_param['F_type']  # 'macro'
+save=global_param.traning_param['save']
 exp_name= global_param.traning_param['exp_tag']
+
 
 
 machine_name = os.uname()[1]
@@ -51,7 +53,8 @@ def Experence():
             'nb_epoch': nb_epoch,
             'F_type': F_type,
             'lr': lr,
-            'do_valid':do_valid
+            'do_valid':do_valid,
+            'save':save
         }
 
 
