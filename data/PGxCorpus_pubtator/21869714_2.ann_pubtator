@@ -1,0 +1,6 @@
+T1	Disease 68 94	non-small cell lung cancer
+T2	Disease 97 102	NSCLC
+T3	Gene 181 213	epidermal growth factor receptor
+T4	Gene 216 220	EGFR
+T5	Chemical 223 231	tyrosine
+T6	Gene 326 330	EGFR

@@ -1,0 +1,6 @@
+T1	Chemical 49 57	dopamine
+T2	Gene 75 103	catechol-O-methyltransferase
+T3	Gene 106 110	COMT
+T4	Mutation 111 120	Val158Met
+T5	Disease 161 168	anxiety
+T6	Disease 178 185	anxiety

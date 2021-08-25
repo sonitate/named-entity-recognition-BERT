@@ -1,0 +1,12 @@
+T1	Chemical 46 57	glutathione
+T2	Gene 99 104	GSTT1
+T3	Gene 107 112	GSTP1
+T4	Mutation 115 121	rs1695
+T5	Gene 124 129	GSTO1
+T6	Mutation 132 138	rs4925
+T7	Gene 141 146	GSTO2
+T8	Mutation 149 157	rs156697
+T9	Gene 160 165	GSTM1
+T10	Gene 168 173	GSTA1
+T11	Mutation 176 185	rs3957357
+T12	Disease 239 253	bladder cancer

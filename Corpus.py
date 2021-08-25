@@ -28,6 +28,27 @@ labels_ranges={
    'all':range(1,11)
 }
 
+Entity_types_pub={
+'Chemical' : 1,
+'Disease' : 2 ,
+'Gene' : 3,
+'Mutation' :4
+}
+labels_ranges_pub={
+   'chem':[1],
+   'phen':range(2),
+   'gen':range(3,4),
+   'all':range(1,4)
+}
+classes_pub=[
+'O',
+'Chemical',
+'Disease',
+'Gene',
+'Mutation'
+]
+
+
 shift=0
 def head_label(label,head):
     if label in labels_ranges[head]:
@@ -76,6 +97,31 @@ def load_ann(ann_path,head='all'):
     for i in T:
 
         label = Entity_types[i.split()[1]]
+        label = head_label(label,head=head)
+
+        end_i=3
+        start=i.split()[2]
+        end=i.split()[end_i]
+        while(';' in end):
+            range=[int(start),int(end.split(';')[0])]
+            labels.append((range, label))
+            start=int(end.split(';')[1])
+            end_i+=1
+            end = i.split()[end_i]
+
+        range = [int(start), int(end.split(';')[0])]
+        labels.append((range, label))
+
+
+    return labels
+
+def load_ann_pub(ann_path,head='all'):
+    ann = open(ann_path).read().split('\n')
+    labels = []
+    T = [i for i in ann if i.startswith('T')]
+    for i in T:
+
+        label = Entity_types_pub[i.split()[1]]
         label = head_label(label,head=head)
 
         end_i=3
@@ -176,14 +222,80 @@ def words2IOBES(words_labels_dataset):
         iobes_dataset.append(iobes)
     return iobes_dataset
 
+def brat_pub(path,path_pub,head):
+    global shift
+    shift=labels_ranges_pub[head][0]
+
+    ann_txt_files = [(f.split(path)[1], (f.split(path)[1]).split('ann')[0] + "txt") for f in glob.glob(path + "/*.ann")]
+
+    random.shuffle(ann_txt_files)
+    Dataset_X = []
+    Dataset_Y = []
+    Dataset_Tokens = []
+    Dataset_pub = []
+    for ann, txt in ann_txt_files:
+        sentence = load_txt(path+txt)
+        # labels = load_ann_pub(path+ann,head=head)
+        labels = load_ann(path+ann,head=head)
+        labels_pub = load_ann_pub(path_pub+ann+'_pubtator',head=head)
+        tokens = tokenizer.tokenize(sentence)
+        target = [[0] * len(tokens) for i in range(3)]
+        target_pub = [[0] * len(tokens) for i in range(3)]
+        pointer=0
+        pointer_pub=0
+        i=0
+        j=0
+        for t in tokens :
+            pointer=pointer_step(pointer,t,sentence)
+            for l in labels:
+                level=label_level(labels,l)
+                if pointer in range(l[0][0], l[0][1]+1):
+                    target[level][j]=l[1]
+            j+=1
+        for t in tokens :
+            pointer_pub=pointer_step(pointer_pub,t,sentence)
+            for l in labels_pub:
+                level=label_level(labels_pub,l)
+                if pointer_pub in range(l[0][0], l[0][1]+1):
+                    target_pub[level][i]=l[1]
+            i+=1
+        Dataset_X.append(get_bert_inputs(sentence))
+        Dataset_pub.append([0]+target_pub[0]+[0]+[0]+target_pub[1]+[0]+[0]+target_pub[2]+[0])
+        Dataset_Y.append([0]+target[0]+[0]+[0]+target[1]+[0]+[0]+target[2]+[0])
+        Dataset_Tokens.append(tokens)
+        # Dataset_pub.append([0]+target_pub[0]+[0]+[0]+target_pub[1]+[0]+[0]+target_pub[2]+[0])
+        # print('##########################')
+        # print(txt)
+        # print(target[0])
+        # print(target[1])
+        # print(target[2])
+        # print('##########################\n\n\n')
+        # print(txt)
+        # print(target_pub[0])
+        # print(target_pub[1])
+        # print(target_pub[2])
+        # print('##########################\n\n\n')
+    # print(Dataset_X_pub[-1])
+    # print(len(Dataset_Y_pub[-1]))
+    # print(Dataset_Tokens_pub[-1])
+
+
+    return {'bert_inputs':Dataset_X,'pub_inputs':Dataset_pub}, Dataset_Y, Dataset_Tokens
 
 
 class Corpus():
 
-    def __init__(self, path, name,head='all'):
+    def __init__(self, path, name,head='all',path_pub=None):
+        if(path_pub!=None):
+            self.Entityes_types_pub = Entity_types_pub
+            self.Nb_class = len(Entity_types_pub.keys())+1
+        else:
+            self.Entityes_types = Entity_types
+            self.Nb_class = len(Entity_types.keys())+1
         self.Entityes_types = Entity_types
         self.Nb_class = len(Entity_types.keys())+1
         self.path = path
+        self.path_pub = path_pub
         self.name = name
         self.data = None
         self.head = head
@@ -192,6 +304,8 @@ class Corpus():
     def get_data(self):
         if self.name == 'pgx':
             self.data = brat(self.path,self.head)
+        if self.name == 'pgx_pub':
+            self.data = brat_pub(self.path,self.path_pub,self.head)
 
         return self.data
 

@@ -1,0 +1,6 @@
+T1	Disease 32 38	tumors
+T2	Gene 92 98	PIK3CA
+T3	Gene 137 143	PIK3CA
+T4	Mutation 146 157	p.Glu542Lys
+T5	Chemical 187 197	crizotinib
+T6	Gene 216 222	PIK3CA

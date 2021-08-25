@@ -1,0 +1,7 @@
+T1	Chemical 14 22	tyrosine
+T2	Chemical 50 59	gefitinib
+T3	Chemical 64 73	erlotinib
+T4	Disease 91 118	non-small cell lung cancers
+T5	Disease 121 127	NSCLCs
+T6	Gene 135 167	epidermal growth factor receptor
+T7	Gene 170 174	EGFR

@@ -1,0 +1,6 @@
+T1	Chemical 41 51	paclitaxel
+T2	Chemical 74 84	paclitaxel
+T3	Disease 118 132	ovarian cancer
+T4	Disease 169 182	cancer testis
+T5	Gene 193 228	Taxol resistance -associated gene 3
+T6	Gene 231 237	TRAG-3

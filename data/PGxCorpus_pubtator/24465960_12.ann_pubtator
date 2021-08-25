@@ -1,0 +1,9 @@
+T1	Gene 0 6	CYP3A5
+T2	Gene 13 19	CYP3A4
+T3	Gene 27 33	CYP3A4
+T4	Mutation 34 43	rs4646437
+T5	Mutation 44 47	T>C
+T6	Gene 52 57	IL-10
+T7	Mutation 58 67	rs1800871
+T8	Mutation 68 71	C>T
+T9	Chemical 150 160	tacrolimus

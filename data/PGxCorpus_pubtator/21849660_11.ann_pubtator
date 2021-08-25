@@ -1,0 +1,5 @@
+T1	Chemical 13 19	Statin
+T2	Disease 102 105	RFS
+T3	Disease 111 113	OS
+T4	Disease 131 153	stage III colon cancer
+T5	Gene 170 174	KRAS

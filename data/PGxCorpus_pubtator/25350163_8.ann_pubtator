@@ -1,0 +1,17 @@
+T1	Mutation 39 46	F508del
+T2	Gene 49 53	CFTR
+T3	Disease 65 67	CF
+T4	Chemical 98 108	cysteamine
+T5	Chemical 113 117	EGCG
+T6	Gene 127 132	BECN1
+T7	Gene 143 149	SQSTM1
+T8	Gene 170 174	CFTR
+T9	Chemical 253 261	chloride
+T10	Gene 336 339	TNF
+T11	Gene 342 351	TNF-alpha
+T12	Disease 354 359	tumor
+T13	Disease 360 368	necrosis
+T14	Gene 382 387	CXCL8
+T15	Gene 390 422	chemokine [C-X-C motif] ligand 8
+T16	Gene 459 462	TNF
+T17	Gene 467 472	CXCL8

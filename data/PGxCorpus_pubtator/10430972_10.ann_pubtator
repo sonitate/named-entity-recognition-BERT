@@ -1,0 +1,5 @@
+T1	Chemical 31 37	folate
+T2	Disease 60 80	hyperhomocysteinemia
+T3	Disease 98 102	ESRD
+T4	Mutation 137 145	677C-->T
+T5	Gene 162 167	MTHFR

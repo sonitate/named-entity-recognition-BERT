@@ -51,17 +51,20 @@ class BertRecNER(nn.Module):
         self.level2=MLP(inputs=768+out)
         self.level3=MLP(inputs=768+out)
 
-    def forward(self, x):
+    def forward(self, x,pre=False):
+        if(pre==False):
+            x=x['bert_inputs']
         rep_vects, _ = self.bert_model(x)
+        # rep_pub = self.pub(x['pub_inputs'])
         if not isinstance(rep_vects, torch.Tensor):
             rep_vects = rep_vects[-1]
-        
+
         level1_logits= self.level1(rep_vects)
 
         level2_inputs = torch.cat((rep_vects,level1_logits),dim=2)
         level2_logits = self.level2(level2_inputs)
         
-        
+
         level3_inputs = torch.cat((rep_vects,level2_logits),dim=2)
         level3_logits = self.level3(level3_inputs)
 

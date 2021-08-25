@@ -1,0 +1,5 @@
+T1	Chemical 0 6	AC0010
+T2	Gene 25 29	EGFR
+T3	Gene 70 74	EGFR
+T4	Mutation 90 95	T790M
+T5	Disease 137 148	Lung Cancer

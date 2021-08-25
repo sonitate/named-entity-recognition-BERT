@@ -1,0 +1,11 @@
+T1	Gene 34 41	CYP2C19
+T2	Mutation 51 57	C3435T
+T3	Chemical 146 158	lansoprazole
+T4	Chemical 161 164	LSZ
+T5	Gene 237 244	CYP2C19
+T6	Mutation 254 260	C3435T
+T7	Chemical 313 316	LSZ
+T8	Chemical 337 360	5'-hydroxy lansoprazole
+T9	Chemical 363 367	HLSZ
+T10	Chemical 374 395	lansoprazole sulphone
+T11	Chemical 438 441	LSZ

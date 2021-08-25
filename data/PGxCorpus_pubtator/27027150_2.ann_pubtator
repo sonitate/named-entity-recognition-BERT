@@ -1,0 +1,7 @@
+T1	Disease 42 50	melanoma
+T2	Disease 65 71	tumors
+T3	Gene 82 86	BRAF
+T4	Mutation 87 92	V600E
+T5	Mutation 97 102	V600K
+T6	Gene 115 119	BRAF
+T7	Chemical 139 149	dabrafenib

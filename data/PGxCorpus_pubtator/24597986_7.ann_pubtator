@@ -1,0 +1,5 @@
+T1	Gene 20 24	RFC1
+T2	Mutation 25 29	G80A
+T3	Chemical 80 83	MTX
+T4	Disease 93 101	toxicity
+T5	Disease 105 118	pediatric ALL

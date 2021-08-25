@@ -1,0 +1,5 @@
+T1	Gene 21 25	EGFR
+T2	Chemical 46 54	icotinib
+T3	Disease 98 100	OS
+T4	Disease 111 116	tumor
+T5	Disease 117 127	metastasis

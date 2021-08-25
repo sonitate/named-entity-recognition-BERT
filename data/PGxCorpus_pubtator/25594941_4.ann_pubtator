@@ -1,0 +1,13 @@
+T1	Mutation 0 9	rs9923231
+T2	Gene 12 18	VKORC1
+T3	Mutation 23 29	rs7294
+T4	Gene 32 38	VKORC1
+T5	Mutation 43 52	rs1057910
+T6	Gene 55 61	CYP2C9
+T7	Mutation 66 75	rs2108622
+T8	Gene 78 84	CYP4F2
+T9	Mutation 93 101	rs699664
+T10	Gene 104 108	GGCX
+T11	Chemical 127 135	warfarin
+T12	Chemical 173 182	vitamin K
+T13	Chemical 313 321	warfarin

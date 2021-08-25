@@ -26,13 +26,13 @@ def train(model, loader,f_loss, optimizer):
     N = 0
     tot_loss, correct = 0.0, 0.0
 
-    for inputs , targets in loader:
+    for inputs ,ann_pub , targets in loader:
 
-        inputs, targets = inputs.to(global_param.device),targets.to(global_param.device)
+        inputs,ann_pub, targets = inputs.to(global_param.device),ann_pub.to(global_param.device),targets.to(global_param.device)
 
         #print(inputs.size())
 
-        outputs = model(inputs)
+        outputs = model({'bert_inputs':inputs,'pub_inputs':ann_pub})
 
         #print(outputs[0].permute(0,2,1).size())
         #print(targets.size())
@@ -73,7 +73,7 @@ def prediction(model,X):
         with torch.no_grad():
             model.to(global_param.device)
             model.eval()
-            output = model(input)
+            output = model(input,pre=True)
             #predicted_targets = output[0].argmax(dim=2)
             predicted_targets = output.argmax(dim=2)
             #predicted_targets=torch.argmax(F.log_softmax(output[0],dim=2),dim=2)
@@ -85,17 +85,18 @@ def prediction(model,X):
 
 
 
-def train_save(model,X_app,Y_app,nb_epoch=30,batch_size=32,X_valid=[],Y_valid=[],F_type='macro',lr= 0.001,do_valid=True,save=False):
+def train_save(model,X_app,ann_pub,Y_app,nb_epoch=30,batch_size=32,X_valid=[],Y_valid=[],F_type='macro',lr= 0.001,do_valid=True,save=False):
 
 
     if(len(Y_valid)==0):
         X_valid,Y_valid=X_app,Y_app
+        # print('##')
 
     path = save_path()
     checkpoint = ModelCheckpoint(path, model,F_type=F_type,save=save)
 
 
-    loader_app = torch_loader(X_app,Y_app,batch_size=batch_size)
+    loader_app = torch_loader(X_app,ann_pub,Y_app,batch_size=batch_size)
 
     f_loss = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(),lr=lr,weight_decay=0.0,amsgrad=False)

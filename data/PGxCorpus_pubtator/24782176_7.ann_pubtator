@@ -1,0 +1,6 @@
+T1	Chemical 78 81	MTX
+T2	Disease 95 103	toxicity
+T3	Gene 142 146	RFC1
+T4	Mutation 157 162	80G>A
+T5	Chemical 165 168	Arg
+T6	Mutation 182 191	rs1051266

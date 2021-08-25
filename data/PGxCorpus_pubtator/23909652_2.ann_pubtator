@@ -1,0 +1,6 @@
+T1	Chemical 0 11	Vemurafenib
+T2	Gene 26 30	BRAF
+T3	Disease 46 53	sarcoma
+T4	Disease 172 192	metastatic melanomas
+T5	Gene 208 212	BRAF
+T6	Mutation 213 218	V600E

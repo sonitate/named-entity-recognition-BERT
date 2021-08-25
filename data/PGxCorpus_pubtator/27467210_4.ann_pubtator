@@ -1,0 +1,7 @@
+T1	Chemical 0 11	Selumetinib
+T2	Chemical 14 21	AZD6244
+T3	Chemical 24 35	ARRY-142886
+T4	Gene 77 83	MEK1/2
+T5	Chemical 148 157	docetaxel
+T6	Gene 175 179	KRAS
+T7	Disease 207 212	NSCLC

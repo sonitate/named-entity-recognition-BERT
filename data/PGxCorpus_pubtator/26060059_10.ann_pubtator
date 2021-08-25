@@ -1,0 +1,7 @@
+T1	Gene 0 5	IL28B
+T2	Mutation 6 15	rs8099917
+T3	Mutation 18 28	rs12979860
+T4	Disease 59 61	MC
+T5	Chemical 90 97	PEG-IFN
+T6	Chemical 102 111	ribavirin
+T7	Disease 211 213	MC

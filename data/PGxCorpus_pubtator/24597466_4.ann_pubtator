@@ -1,0 +1,11 @@
+T1	Gene 28 33	HLA-B
+T2	Chemical 77 80	CBZ
+T3	Disease 90 114	Stevens-Johnson syndrome
+T4	Disease 117 143	toxic epidermal necrolysis
+T5	Disease 146 149	SJS
+T6	Gene 179 184	HLA-B
+T7	Chemical 213 216	CBZ
+T8	Disease 226 251	hypersensitivity syndrome
+T9	Disease 254 257	HSS
+T10	Disease 263 286	maculopapular exanthema
+T11	Disease 289 292	MPE

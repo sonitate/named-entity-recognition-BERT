@@ -1,0 +1,6 @@
+T1	Chemical 36 47	clopidogrel
+T2	Gene 122 129	CYP2C19
+T3	Disease 262 282	cardiovascular death
+T4	Disease 285 306	myocardial infarction
+T5	Disease 312 318	stroke
+T6	Disease 367 377	thrombosis

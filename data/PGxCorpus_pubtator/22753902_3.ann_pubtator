@@ -1,0 +1,5 @@
+T1	Chemical 137 147	cytarabine
+T2	Chemical 150 163	anthracycline
+T3	Disease 193 199	Cancer
+T4	Disease 204 212	Leukemia
+T5	Gene 259 264	RUNX1

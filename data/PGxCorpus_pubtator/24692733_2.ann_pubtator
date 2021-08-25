@@ -1,0 +1,6 @@
+T1	Chemical 83 95	folinic acid
+T2	Chemical 98 112	5-fluorouracil
+T3	Chemical 115 125	irinotecan
+T4	Gene 141 145	KRAS
+T5	Gene 207 211	BRAF
+T6	Gene 216 222	PIK3CA

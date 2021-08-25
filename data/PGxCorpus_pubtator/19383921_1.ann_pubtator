@@ -1,0 +1,6 @@
+T1	Gene 0 29	Poly(ADP-ribose) polymerase-1
+T2	Gene 74 79	Brca2
+T3	Gene 82 85	p53
+T4	Disease 102 108	tumors
+T5	Disease 121 133	delays tumor
+T6	Chemical 162 173	carboplatin

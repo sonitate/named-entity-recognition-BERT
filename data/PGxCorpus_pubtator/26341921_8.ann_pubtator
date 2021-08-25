@@ -1,0 +1,6 @@
+T1	Gene 44 48	EGFR
+T2	Chemical 108 116	afatinib
+T3	Gene 173 177	EGFR
+T4	Mutation 180 185	L858R
+T5	Disease 198 218	lung adenocarcinomas
+T6	Disease 227 232	tumor

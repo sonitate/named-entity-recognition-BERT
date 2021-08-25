@@ -1,0 +1,7 @@
+T1	Gene 34 38	ITPA
+T2	Disease 74 92	haemolytic anaemia
+T3	Chemical 97 100	RBV
+T4	Chemical 170 177	PEG-IFN
+T5	Chemical 182 185	RBV
+T6	Mutation 262 271	rs8099917
+T7	Gene 275 280	IL28B

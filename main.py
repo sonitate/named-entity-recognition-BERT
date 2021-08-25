@@ -12,9 +12,11 @@ from Train import train_save, prediction
 from itertools import chain
 
 head =global_param.model_param['head']
-corpus=Corpus('data/PGxCorpus','pgx',head=head)
-X_app,Y_app, Tokens= corpus.get_data()
-print(len(Y_app))
+# corpus=Corpus('data/PGxCorpus','pgx',head=head)
+# X_app,Y_app, Tokens= corpus.get_data()
+# print(len(Y_app))
+corpus=Corpus('data/PGxCorpus','pgx_pub',head=head,path_pub='data/PGxCorpus_pubtator')
+X_app,Y_app,Tokens= corpus.get_data()
 
 ###### param sup #######
 do_valid=True
@@ -48,7 +50,8 @@ def Experence():
 
     train_param = {
             'model': model,
-            'X_app': X_app,
+            'X_app': X_app['bert_inputs'],
+            'ann_pub': X_app['pub_inputs'],
             'Y_app': Y_app,
             'nb_epoch': nb_epoch,
             'F_type': F_type,

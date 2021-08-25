@@ -1,0 +1,7 @@
+T1	Gene 143 147	BRAF
+T2	Mutation 150 155	V600E
+T3	Gene 170 174	BRAF
+T4	Mutation 177 182	V600K
+T5	Disease 205 213	melanoma
+T6	Chemical 248 258	dabrafenib
+T7	Chemical 283 293	trametinib

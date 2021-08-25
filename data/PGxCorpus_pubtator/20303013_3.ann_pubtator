@@ -1,0 +1,9 @@
+T1	Gene 75 80	GSTM1
+T2	Gene 83 88	GSTT1
+T3	Gene 95 100	GSTP1
+T4	Disease 172 187	B-cell lymphoma
+T5	Chemical 222 238	cyclophosphamide
+T6	Chemical 241 252	doxorubicin
+T7	Chemical 255 266	vincristine
+T8	Chemical 269 279	prednisone
+T9	Gene 285 289	CHOP

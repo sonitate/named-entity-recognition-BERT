@@ -1,0 +1,5 @@
+T1	Disease 6 20	encephalopathy
+T2	Chemical 33 36	MTX
+T3	Chemical 63 75	methotrexate
+T4	Gene 114 119	MTHFR
+T5	Mutation 120 125	C677T

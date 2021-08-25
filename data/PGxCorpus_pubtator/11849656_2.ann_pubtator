@@ -1,0 +1,11 @@
+T1	Gene 102 131	angiotensin converting enzyme
+T2	Gene 134 137	ACE
+T3	Gene 169 184	angiotensinogen
+T4	Gene 187 190	AGT
+T5	Mutation 193 198	M253T
+T6	Gene 203 233	angiotensin II type 1 receptor
+T7	Gene 236 240	AT1R
+T8	Mutation 243 249	A1166C
+T9	Chemical 270 279	quinapril
+T10	Gene 285 288	ACE
+T11	Disease 349 359	restenosis

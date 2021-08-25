@@ -1,0 +1,6 @@
+T1	Chemical 50 56	copper
+T2	Chemical 59 61	Cu
+T3	Chemical 66 76	disulfiram
+T4	Chemical 79 82	DSF
+T5	Disease 150 163	breast cancer
+T6	Gene 194 200	PIK3CA

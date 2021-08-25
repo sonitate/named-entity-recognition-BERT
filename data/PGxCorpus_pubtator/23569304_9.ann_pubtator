@@ -1,0 +1,6 @@
+T1	Chemical 23 34	vemurafenib
+T2	Gene 106 112	ERK1/2
+T3	Gene 191 195	NRAS
+T4	Gene 217 221	MEK1
+T5	Mutation 224 228	Q56P
+T6	Gene 234 244	MEK1(E203K

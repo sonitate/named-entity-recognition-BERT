@@ -1,0 +1,10 @@
+T1	Gene 109 114	HLA-B
+T2	Disease 141 157	hypersensitivity
+T3	Chemical 180 188	abacavir
+T4	Gene 191 221	thiopurine S-methyltransferase
+T5	Gene 224 228	TPMT
+T6	Chemical 251 261	thiopurine
+T7	Disease 262 270	toxicity
+T8	Gene 277 283	CYP2C9
+T9	Gene 288 294	VKORC1
+T10	Chemical 345 353	warfarin

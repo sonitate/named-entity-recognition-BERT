@@ -1,0 +1,8 @@
+T1	Chemical 10 18	Paraffin
+T2	Disease 88 105	colorectal cancer
+T3	Gene 179 184	MTHFR
+T4	Gene 206 211	MTHFR
+T5	Mutation 219 227	677C-->T
+T6	Mutation 230 239	Ala-->Val
+T7	Gene 255 260	XRCC1
+T8	Mutation 268 277	Arg-->Gln

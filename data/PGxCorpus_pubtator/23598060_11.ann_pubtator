@@ -1,0 +1,10 @@
+T1	Gene 46 50	COMT
+T2	Mutation 51 57	rs4680
+T3	Disease 75 88	schizophrenia
+T4	Gene 149 153	COMT
+T5	Mutation 154 162	rs737865
+T6	Gene 206 210	COMT
+T7	Mutation 211 219	rs165599
+T8	Disease 237 250	schizophrenia
+T9	Chemical 329 332	PPI
+T10	Disease 344 357	schizophrenia
