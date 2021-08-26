@@ -53,8 +53,11 @@ class BertRecNER(nn.Module):
 
     def forward(self, x,pre=False):
         if(pre==False):
-            x=x['bert_inputs']
-        rep_vects, _ = self.bert_model(x)
+            rep_vects, _ = self.bert_model(x['bert_inputs'])
+            # rep_pub = self.pub(x['pub_inputs']) //error index out of range
+
+        else:
+            rep_vects, _ = self.bert_model(x)
         # rep_pub = self.pub(x['pub_inputs'])
         if not isinstance(rep_vects, torch.Tensor):
             rep_vects = rep_vects[-1]
