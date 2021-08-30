@@ -232,7 +232,7 @@ def brat_pub(path,path_pub,head):
     Dataset_X = []
     Dataset_Y = []
     Dataset_Tokens = []
-    Dataset_pub = []
+    # Dataset_pub = []
     for ann, txt in ann_txt_files:
         sentence = load_txt(path+txt)
         # labels = load_ann_pub(path+ann,head=head)
@@ -259,8 +259,8 @@ def brat_pub(path,path_pub,head):
                 if pointer_pub in range(l[0][0], l[0][1]+1):
                     target_pub[level][i]=l[1]
             i+=1
-        Dataset_X.append(get_bert_inputs(sentence))
-        Dataset_pub.append([0]+target_pub[0]+[0]+[0]+target_pub[1]+[0]+[0]+target_pub[2]+[0])
+        Dataset_X.append({'bert_inputs':get_bert_inputs(sentence),'pub_inputs':[0]+target_pub[0]+[0]+[0]+target_pub[1]+[0]+[0]+target_pub[2]+[0]})
+        # Dataset_pub.append()
         Dataset_Y.append([0]+target[0]+[0]+[0]+target[1]+[0]+[0]+target[2]+[0])
         Dataset_Tokens.append(tokens)
         # Dataset_pub.append([0]+target_pub[0]+[0]+[0]+target_pub[1]+[0]+[0]+target_pub[2]+[0])
@@ -280,7 +280,7 @@ def brat_pub(path,path_pub,head):
     # print(Dataset_Tokens_pub[-1])
 
 
-    return {'bert_inputs':Dataset_X,'pub_inputs':Dataset_pub}, Dataset_Y, Dataset_Tokens
+    return Dataset_X, Dataset_Y, Dataset_Tokens
 
 
 class Corpus():

@@ -25,15 +25,21 @@ def train(model, loader,f_loss, optimizer):
 
     N = 0
     tot_loss, correct = 0.0, 0.0
+    # print(loader[0])
+    for berts,pubs, targets in loader:
 
-    for inputs ,ann_pub , targets in loader:
-
-        inputs,ann_pub, targets = inputs.to(global_param.device),ann_pub.to(global_param.device),targets.to(global_param.device)
-
+        berts = berts.to(global_param.device)
+        # print(berts)
+        # print(type(berts))
+        pubs = pubs.to(global_param.device)
+        targets = targets.to(global_param.device)
         #print(inputs.size())
 
-        outputs = model({'bert_inputs':inputs,'pub_inputs':ann_pub})
-
+        outputs = model({'bert_inputs':berts,'pub_inputs':pubs})
+        result=outputs.argmax(dim=2)
+        # print(result[:3])
+        # print(outputs.permute(0,2,1).argmax(dim=2))
+        # print(targets[:3])
         #print(outputs[0].permute(0,2,1).size())
         #print(targets.size())
         #print(outputs.size())
@@ -65,15 +71,32 @@ def train(model, loader,f_loss, optimizer):
 
 def prediction(model,X):
 
-    pbar = tqdm(total=len(X), desc=" Prediction : ")
     Y=[]
-    for x in X:
-        input=torch.stack([x])
-        input=input.to(global_param.device)
+    # print(type(X))
+    # input_map=[item[0] for item in X]
+    bert=[i['bert_inputs'] for i in X]
+    # bert=torch.nn.utils.rnn.pad_sequence(bert, batch_first=True)
+    # print
+    pub=[torch.tensor(i['pub_inputs']) for i in X]
+    # pub=torch.nn.utils.rnn.pad_sequence(pub, batch_first=True)
+    X_in=[{'bert_inputs':i,'pub_inputs':j} for i,j in zip(bert,pub)]
+    # print(X_in[0])
+    # print(len(X_in))
+    pbar = tqdm(total=len(X_in), desc=" Prediction : ")
+    for inputs in X_in:
+        berts=torch.stack([inputs['bert_inputs']])
+        pubs=torch.stack([inputs['pub_inputs']])
+        # input=input.to(global_param.device)
+        # print(berts)
+        # print(pubs)
+        berts = berts.to(global_param.device)
+        pubs = pubs.to(global_param.device)
+    # print(bert[1])
+        # input=input.to(global_param.device)
         with torch.no_grad():
             model.to(global_param.device)
             model.eval()
-            output = model(input,pre=True)
+            output = model({'bert_inputs':berts,'pub_inputs':pubs})
             #predicted_targets = output[0].argmax(dim=2)
             predicted_targets = output.argmax(dim=2)
             #predicted_targets=torch.argmax(F.log_softmax(output[0],dim=2),dim=2)
@@ -85,18 +108,18 @@ def prediction(model,X):
 
 
 
-def train_save(model,X_app,ann_pub,Y_app,nb_epoch=30,batch_size=32,X_valid=[],Y_valid=[],F_type='macro',lr= 0.001,do_valid=True,save=False):
+def train_save(model,X_app,Y_app,nb_epoch=30,batch_size=32,X_valid=[],Y_valid=[],F_type='macro',lr= 0.001,do_valid=True,save=False):
 
 
     if(len(Y_valid)==0):
         X_valid,Y_valid=X_app,Y_app
-        # print('##')
+        print('##')
 
     path = save_path()
     checkpoint = ModelCheckpoint(path, model,F_type=F_type,save=save)
 
 
-    loader_app = torch_loader(X_app,ann_pub,Y_app,batch_size=batch_size)
+    loader_app = torch_loader(X_app,Y_app,batch_size=batch_size)
 
     f_loss = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(),lr=lr,weight_decay=0.0,amsgrad=False)

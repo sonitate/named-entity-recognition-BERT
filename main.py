@@ -50,8 +50,7 @@ def Experence():
 
     train_param = {
             'model': model,
-            'X_app': X_app['bert_inputs'],
-            'ann_pub': X_app['pub_inputs'],
+            'X_app': X_app,
             'Y_app': Y_app,
             'nb_epoch': nb_epoch,
             'F_type': F_type,

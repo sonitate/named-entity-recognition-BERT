@@ -43,7 +43,8 @@ class ModelCheckpoint:
         self.f_type=F_type
 
     def update(self,pred,Y,epoch,loss,acc,do_valid=True):
-
+        # print(pred[0])
+        # print(Y[0])
         print('|||||||||||| do valid :',do_valid)
         f = f1_score(y_pred= words2IOBES(pred), y_true= words2IOBES(Y), average=self.f_type, scheme=IOBES,mode='strict')
         #torch.save(self.model, self.filepath +"/last_model.pt")
