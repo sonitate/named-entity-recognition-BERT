@@ -49,7 +49,7 @@ def train(model, loader,f_loss, optimizer):
         for inputs , targets in loader:
 
             inputs, targets = inputs.to(global_param.device),targets.to(global_param.device)
-            print(corpus)
+            # print(corpus)
             #print(inputs.size())
 
             outputs = model(inputs,corpus)
@@ -99,7 +99,7 @@ def prediction(model,X):
             with torch.no_grad():
                 model.to(global_param.device)
                 model.eval()
-                output = model({'bert_inputs':berts,'pub_inputs':pubs})
+                output = model({'bert_inputs':berts,'pub_inputs':pubs},corpus)
                 predicted_targets = output.argmax(dim=2)
                 Y.append(predicted_targets.tolist()[0])
             pbar.update(1)
@@ -112,7 +112,7 @@ def prediction(model,X):
             with torch.no_grad():
                 model.to(global_param.device)
                 model.eval()
-                output = model(input)
+                output = model(input,corpus)
                 #predicted_targets = output[0].argmax(dim=2)
                 predicted_targets = output.argmax(dim=2)
                 #predicted_targets=torch.argmax(F.log_softmax(output[0],dim=2),dim=2)
