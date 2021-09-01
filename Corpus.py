@@ -30,9 +30,9 @@ labels_ranges={
 
 Entity_types_pub={
 'Chemical' : 1,
-'Disease' : 2 ,
+'Disease' : 8 ,
 'Gene' : 3,
-'Mutation' :4
+'Mutation' :5
 }
 labels_ranges_pub={
    'chem':[1],

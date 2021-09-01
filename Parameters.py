@@ -37,7 +37,9 @@ class Hyperparameter :
                             help='number of epochs ( 5/8 : for fine tuning ) / (30/ 60) for frozen ')
 
         parser.add_argument('--save', default=False, action='store_true',help='add --save to save the model into folder,default False')
-
+        parser.add_argument('-corpus', default='pgx', choices=['pgx', 'pgx_pub'],
+                            dest='corpus',
+                            help='corpus (pgx, pgx_pub)')
         param = parser.parse_args()
 
 
@@ -47,7 +49,7 @@ class Hyperparameter :
         }
 
         self.corpus_param={
-        'corpus':'pgx'
+        'corpus':param.corpus
         }
 
 
@@ -63,7 +65,8 @@ class Hyperparameter :
         'F_type':param.F_type,
         'exp_tag':method,
         'lr':param.lr,
-        'save':param.save
+        'save':param.save,
+        'corpus':param.corpus
         }
         
         method+='_ep'+str(self.traning_param['num_ep'])

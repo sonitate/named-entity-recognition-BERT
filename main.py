@@ -12,10 +12,11 @@ from Train import train_save, prediction
 from itertools import chain
 
 head =global_param.model_param['head']
-# corpus=Corpus('data/PGxCorpus','pgx',head=head)
-# X_app,Y_app, Tokens= corpus.get_data()
-# print(len(Y_app))
-corpus=Corpus('data/PGxCorpus','pgx_pub',head=head,path_pub='data/PGxCorpus_pubtator')
+corpus_path =global_param.corpus_param['corpus']
+if(corpus_path=='pgx'):
+    corpus=Corpus('data/PGxCorpus','pgx',head=head)
+elif(corpus_path=='pgx_pub'):
+    corpus=Corpus('data/PGxCorpus','pgx_pub',head=head,path_pub='data/PGxCorpus_pubtator')
 X_app,Y_app,Tokens= corpus.get_data()
 
 ###### param sup #######
@@ -46,7 +47,7 @@ def Experence():
     model=BertRecNER(bert_type=bert_type)
     
     model.to(global_param.device)
-    
+    print(model)
 
     train_param = {
             'model': model,
@@ -56,7 +57,8 @@ def Experence():
             'F_type': F_type,
             'lr': lr,
             'do_valid':do_valid,
-            'save':save
+            'save':save,
+            'corpus':corpus_path
         }
 
 

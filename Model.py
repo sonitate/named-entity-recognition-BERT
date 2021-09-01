@@ -34,7 +34,7 @@ class MLP(nn.Module):
 
 
 class BertRecNER(nn.Module):
-    def __init__(self, out=11,pub=5,dim_em=6, bert_type='bert'):
+    def __init__(self, out=11,pub=5,dim_em=5, bert_type='bert'):
         super(BertRecNER, self).__init__()
         _, self.bert_model = Bert.get_bert(bert_type=bert_type)
 
@@ -53,38 +53,30 @@ class BertRecNER(nn.Module):
         self.level2=MLP(inputs=768+out)
         self.level3=MLP(inputs=768+out)
 
-    def forward(self, x):
-        rep_vects, _ = self.bert_model(x['bert_inputs'])
-        # rep_pub = self.pub(x['pub_inputs']) //error index out of range
+    def forward(self, x,corpus):
+        if(corpus=='pgx_pub'):
+            rep_vects, _ = self.bert_model(x['bert_inputs'])
+            rep_pub = self.pub_em(x['pub_inputs'])
+            if not isinstance(rep_vects, torch.Tensor):
+                rep_vects = rep_vects[-1]
+            level1_logits= self.level1(rep_vects)
+            level2_inputs = torch.cat((rep_vects,level1_logits),dim=2)
+            level2_logits = self.level2(level2_inputs)
+            level3_inputs = torch.cat((rep_vects,level2_logits),dim=2)
+            level3_logits = self.level3(level3_inputs)
+            all_level=torch.cat((level1_logits, level2_logits, level3_logits),dim=1)
+            outputs=torch.cat((all_level,rep_pub),dim=2)
+            return outputs
 
-        # rep_vects, _ = self.bert_model(x['pub_inputs'])
-        rep_pub = self.pub_em(x['pub_inputs'])
-        if not isinstance(rep_vects, torch.Tensor):
-            rep_vects = rep_vects[-1]
-        # print(type(rep_vects))
-        print(rep_vects.shape)
-        # print(rep_pub.size())
-        print(rep_pub.shape)
-        # )
-        # concat_vects=torch.stack((rep_vects,rep_pub),dim=0)
-        # print(concat_vects.size())
-        level1_logits= self.level1(rep_vects)
-        print(level1_logits.shape)
-        # print(rep_pub.size())
+        elif(corpus=='pgx'):
+            rep_vects, _ = self.bert_model(x)
+            if not isinstance(rep_vects, torch.Tensor):
+                rep_vects = rep_vects[-1]
+            level1_logits= self.level1(rep_vects)
+            level2_inputs = torch.cat((rep_vects,level1_logits),dim=2)
+            level2_logits = self.level2(level2_inputs)
+            level3_inputs = torch.cat((rep_vects,level2_logits),dim=2)
+            level3_logits = self.level3(level3_inputs)
+            outputs=torch.cat((level1_logits, level2_logits, level3_logits),dim=1)
 
-        level2_inputs = torch.cat((rep_vects,level1_logits),dim=2)
-        level2_logits = self.level2(level2_inputs)
-        # print(level2_logits[0].shape)
-
-        level3_inputs = torch.cat((rep_vects,level2_logits),dim=2)
-        level3_logits = self.level3(level3_inputs)
-        print(level3_logits.size())
-        outputs=torch.cat((level1_logits, level2_logits, level3_logits),dim=1)
-        concat_vects=torch.cat((outputs,rep_pub),dim=2)
-        # print(concat_vects[0])
-        # print(outputs[0])
-        print(concat_vects.size())
-        # print(outputs.shape)
-
-
-        return concat_vects
+            return outputs
