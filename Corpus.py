@@ -29,16 +29,16 @@ labels_ranges={
 }
 
 Entity_types_pub={
-'Chemical' : 1,
-'Disease' : 8 ,
-'Gene' : 3,
-'Mutation' :5
+'Chemical' : 12,
+'Disease' : 13 ,
+'Gene' : 14,
+'Mutation' :15
 }
 labels_ranges_pub={
-   'chem':[1],
-   'phen':range(2),
-   'gen':range(3,4),
-   'all':range(1,4)
+   'chem':[12],
+   'phen':range(13),
+   'gen':range(14,15),
+   'all':range(12,15)
 }
 classes_pub=[
 'O',
