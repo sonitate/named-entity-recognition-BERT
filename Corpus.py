@@ -28,6 +28,7 @@ labels_ranges = {
     "all": range(1, 11),
 }
 
+<<<<<<< HEAD
 Entity_types_pub = {"Chemical": 11, "Disease": 12, "Gene": 13, "Mutation": 14}
 labels_ranges_pub = {
     "chem": [11],
@@ -47,12 +48,37 @@ classes_pub = [
     "Disease",
     "Pharmacodynamic_phenotype",
     "Pharmacokinetic_phenotype",
+=======
+Entity_types_pub={
+'Chemical' : 1,
+'Disease' : 2 ,
+'Gene' : 3,
+'Mutation' :4
+}
+labels_ranges_pub={
+   'chem':[1],
+   'phen':range(2),
+   'gen':range(3,4),
+   'all':range(1,4)
+}
+classes_pub=[
+'O',
+'Chemical',
+'Disease',
+'Gene',
+'Mutation'
+>>>>>>> 420cef12b43cd9f447af78f6bef235c1aefab4b7
 ]
-
 
 shift = 0
 
 
+<<<<<<< HEAD
+shift = 0
+
+
+=======
+>>>>>>> 420cef12b43cd9f447af78f6bef235c1aefab4b7
 def head_label(label, head):
     if label in labels_ranges[head]:
         return 1 + label - labels_ranges[head][0]
@@ -246,10 +272,13 @@ def brat(path, head):
 
 
 def headc(label):
+<<<<<<< HEAD
     # print('###')
     # print(label)
     # print(shift)
     # print('###')
+=======
+>>>>>>> 420cef12b43cd9f447af78f6bef235c1aefab4b7
     return 0 if label == 0 else label + shift - 1
 
 

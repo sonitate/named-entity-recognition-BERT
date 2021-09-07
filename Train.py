@@ -102,10 +102,7 @@ def prediction(model,X):
             with torch.no_grad():
                 model.to(global_param.device)
                 model.eval()
-                # print(berts)
-                # print(pubs)
                 output = model({'bert_inputs':berts,'pub_inputs':pubs},corpus)
-                # print(output.argmax(dim=2))
                 predicted_targets = output.argmax(dim=2)
                 Y.append(predicted_targets.tolist()[0])
             pbar.update(1)
