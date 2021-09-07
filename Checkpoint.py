@@ -6,7 +6,7 @@ import torch
 from seqeval.metrics import classification_report, f1_score
 from seqeval.scheme import IOBES
 
-from Corpus import words2IOBES ##, words2IOBES_pub
+from Corpus import words2IOBES , words2IOBES_pub
 from Parameters import global_param
 
 
@@ -50,8 +50,8 @@ class ModelCheckpoint:
         print(corpus)
         if corpus == "pgx":
             f = f1_score(
-                y_pred=words2IOBES(pred),
-                y_true=words2IOBES(Y),
+                y_pred=words2IOBES_pub(pred),
+                y_true=words2IOBES_pub(Y),
                 average=self.f_type,
                 scheme=IOBES,
                 mode="strict",
@@ -108,8 +108,8 @@ class ModelCheckpoint:
             # torch.save(self.model, self.filepath +"/last_model.pt")
             elif corpus == "pgx_pub":
                 report = classification_report(
-                    y_pred=words2IOBES(pred),
-                    y_true=words2IOBES(Y),
+                    y_pred=words2IOBES_pub(pred),
+                    y_true=words2IOBES_pub(Y),
                     scheme=IOBES,
                     mode="strict",
                 )

@@ -5,7 +5,7 @@ from seqeval.metrics.v1 import precision_recall_fscore_support as precision_reca
 from seqeval.scheme import IOBES
 import Bert
 import Cross_validation
-from Corpus import Corpus,words2IOBES
+from Corpus import Corpus,words2IOBES,words2IOBES_pub
 from Model import BertRecNER
 from Parameters import global_param
 from Train import train_save, prediction
@@ -86,7 +86,7 @@ def Experence():
     if(corpus_path=='pgx'):
         pred_e, true_e= words2IOBES(pred), words2IOBES(true)
     elif(corpus_path=='pgx_pub'):
-        pred_e, true_e= words2IOBES(pred), words2IOBES(true)
+        pred_e, true_e= words2IOBES_pub(pred), words2IOBES_pub(true)
 
 
 
