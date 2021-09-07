@@ -5,7 +5,7 @@ from seqeval.metrics.v1 import precision_recall_fscore_support as precision_reca
 from seqeval.scheme import IOBES
 import Bert
 import Cross_validation
-from Corpus import Corpus,words2IOBES,words2IOBES_pub
+from Corpus import Corpus,words2IOBES
 from Model import BertRecNER
 from Parameters import global_param
 from Train import train_save, prediction

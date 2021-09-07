@@ -282,36 +282,36 @@ def words2IOBES(words_labels_dataset):
     return iobes_dataset
 
 
-def words2IOBES_pub(words_labels_dataset):
-    iobes_dataset = []
-    for words in words_labels_dataset:
-        iobes = [
-            classes_pub[headc(words[0])]
-            if words[0] == 0
-            else "B-" + classes_pub[headc(words[0])]
-        ]
+# def words2IOBES_pub(words_labels_dataset):
+#     iobes_dataset = []
+#     for words in words_labels_dataset:
+#         iobes = [
+#             classes_pub[headc(words[0])]
+#             if words[0] == 0
+#             else "B-" + classes_pub[headc(words[0])]
+#         ]
 
-        for i in range(1, len(words) - 1):
-            # print(words[i])
-            # print(headc(words[i]))
-            if words[i] == 0:
-                iobes.append(classes_pub[headc(words[i])])
-            elif words[i - 1] != words[i]:
-                # print(classes_pub[headc(words[i])])
-                iobes.append("B-" + classes_pub[headc(words[i])])
-            elif words[i + 1] != words[i]:
-                iobes.append("E-" + classes_pub[headc(words[i])])
-            else:
-                iobes.append("I-" + classes_pub[headc(words[i])])
+#         for i in range(1, len(words) - 1):
+#             # print(words[i])
+#             # print(headc(words[i]))
+#             if words[i] == 0:
+#                 iobes.append(classes_pub[headc(words[i])])
+#             elif words[i - 1] != words[i]:
+#                 # print(classes_pub[headc(words[i])])
+#                 iobes.append("B-" + classes_pub[headc(words[i])])
+#             elif words[i + 1] != words[i]:
+#                 iobes.append("E-" + classes_pub[headc(words[i])])
+#             else:
+#                 iobes.append("I-" + classes_pub[headc(words[i])])
 
-        prefix = "E-" if words[-1] == words[-2] else "B-"
-        iobes.append(
-            classes_pub[headc(words[-1])]
-            if words[-1] == 0
-            else prefix + classes_pub[headc(words[-1])]
-        )
-        iobes_dataset.append(iobes)
-    return iobes_dataset
+#         prefix = "E-" if words[-1] == words[-2] else "B-"
+#         iobes.append(
+#             classes_pub[headc(words[-1])]
+#             if words[-1] == 0
+#             else prefix + classes_pub[headc(words[-1])]
+#         )
+#         iobes_dataset.append(iobes)
+#     return iobes_dataset
 
 
 def brat_pub(path, path_pub, head):
