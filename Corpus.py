@@ -31,8 +31,8 @@ labels_ranges = {
 Entity_types_pub = {"Chemical": 11, "Disease": 12, "Gene": 13, "Mutation": 14}
 labels_ranges_pub = {
     "chem": [1,11],
-    "gen": [range(2, 7),12],
-    "phen": [range(7, 11),13,14],
+    "gen": [range(2, 7),13,14],
+    "phen": [range(7, 11),12],
     "all": range(1,14),
 }
 classes_pub = [

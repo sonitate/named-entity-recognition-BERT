@@ -86,7 +86,7 @@ def Experence():
     if(corpus_path=='pgx'):
         pred_e, true_e= words2IOBES(pred), words2IOBES(true)
     elif(corpus_path=='pgx_pub'):
-        pred_e, true_e= words2IOBES_pub(pred), words2IOBES_pub(true)
+        pred_e, true_e= words2IOBES(pred), words2IOBES(true)
 
 
 
