@@ -64,6 +64,12 @@ def head_label(label, head):
     else:
         return 0
 
+def head_label_pub(label, head):
+    if label in labels_ranges_pub[head]:
+        return 1 + label - labels_ranges_pub[head][0]
+    else:
+        return 0
+
 
 classes = [
     "O",
@@ -141,7 +147,7 @@ def load_ann(ann_path, head="all"):
     for i in T:
 
         label = Entity_types[i.split()[1]]
-        label = head_label(label, head=head)
+        label = head_label_pub(label, head=head)
 
         end_i = 3
         start = i.split()[2]
@@ -166,7 +172,7 @@ def load_ann_pub(ann_path, head="all"):
     for i in T:
 
         label = Entity_types_pub[i.split()[1]]
-        label = head_label(label, head=head)
+        label = head_label_pub(label, head=head)
 
         end_i = 3
         start = i.split()[2]

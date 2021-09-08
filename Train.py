@@ -104,6 +104,7 @@ def prediction(model,X):
                 model.eval()
                 output = model({'bert_inputs':berts,'pub_inputs':pubs},corpus)
                 predicted_targets = output.argmax(dim=2)
+                # print(predicted_targets.shape)
                 Y.append(predicted_targets.tolist()[0])
             pbar.update(1)
             continue

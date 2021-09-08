@@ -56,39 +56,21 @@ class BertRecNER(nn.Module):
 
     def forward(self, x,corpus):
         if(corpus=='pgx_pub'):
-            print(x['bert_inputs'][0])
             rep_vects, _ = self.bert_model(x['bert_inputs'])
             rep_pub = self.pub_em(x['pub_inputs'])
             if not isinstance(rep_vects, torch.Tensor):
                 rep_vects = rep_vects[-1]
+            if not isinstance(rep_pub, torch.Tensor):
+                rep_pub = rep_pub[-1]
             level1_logits= self.level1(rep_vects)
-            print(level1_logits.shape)
-
-            # l1_lo =self.level1_pub(rep_pub)
-            # print(l1_lo.shape)
-            # con_level1_logits=torch.cat((level1_logits,l1_lo),dim=1)
-            # print(con_level1_logits.shape)
             level2_inputs = torch.cat((rep_vects,level1_logits),dim=2)
-            # l2_in = torch.cat((rep_pub,l1_lo),dim=2)
             level2_logits = self.level2(level2_inputs)
-            # l2_lo =self.level2_pub(l2_in)
-            # con_level2_logits=torch.cat((level2_logits,l2_lo),dim=1)
-            # print(con_level2_logits.shape)
-            # l3_in = torch.cat((rep_pub,l2_lo),dim=2)
-            # l3_lo=self.level3_pub(l3_in)
             level3_inputs = torch.cat((rep_vects,level2_logits),dim=2)
             level3_logits = self.level3(level3_inputs)
-            # con_level3_logits=torch.cat((level3_logits,l3_lo),dim=1)
-            # print(con_level3_logits.shape)
-            all_level=torch.cat((level1_logits, level2_logits, level3_logits),dim=1)
-            # all_level_pub=torch.cat((con_level1_logits, con_level2_logits, con_level3_logits),dim=1)
-            # print(all_level_pub.shape)
-            outputs=torch.cat((all_level,rep_pub),dim=2)
-
-            print(outputs.shape)
-            output=self.three_levels_pub(outputs)
-            print(output.shape)
-            return output
+            all_level=torch.cat((level1_logits, level2_logits, level3_logits),dim=1)##torch.Size([32, 243, 11])
+            all_level_pub=torch.cat((all_level,rep_pub),dim=2) ##torch.Size([32, 243, 16])
+            # output=self.three_levels_pub(all_level_pub)##torch.Size([32, 243, 11])
+            return all_level_pub
 
         elif(corpus=='pgx'):
             rep_vects, _ = self.bert_model(x)
