@@ -47,7 +47,7 @@ def Experence():
     model=BertRecNER(bert_type=bert_type)
     
     model.to(global_param.device)
-    print(model)
+    # print(model)
 
     train_param = {
             'model': model,

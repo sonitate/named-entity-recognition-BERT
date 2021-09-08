@@ -16,6 +16,9 @@ For running an experience run the main code on an CPU or GPU device with the acc
 * To save the model into a folder, add "--save"
 e.g `$ python3 main.py -bert bert -F_type macro -lr 3e-5 -num_ep 10 --save`
 
+* With SciBERT ,Corpus : pgx + pubtator
+`$ python3 main.py -bert scibert -F_type macro -lr 3e-5 -num_ep 10 -head all -corpus pgx_pub`
+
 The resulst of one experience should look like this :  
 ```
               precision    recall  f1-score   support

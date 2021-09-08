@@ -37,7 +37,7 @@ class Hyperparameter :
                             help='number of epochs ( 5/8 : for fine tuning ) / (30/ 60) for frozen ')
 
         parser.add_argument('--save', default=False, action='store_true',help='add --save to save the model into folder,default False')
-        parser.add_argument('-corpus', default='pgx_pub', choices=['pgx', 'pgx_pub'],
+        parser.add_argument('-corpus', default='pgx', choices=['pgx', 'pgx_pub'],
                             dest='corpus',##pgx
                             help='corpus (pgx, pgx_pub)')
         param = parser.parse_args()
