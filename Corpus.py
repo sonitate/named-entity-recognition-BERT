@@ -29,33 +29,9 @@ labels_ranges = {
 }
 
 Entity_types_pub = {"Chemical": 11, "Disease": 12, "Gene": 13, "Mutation": 14}
-labels_ranges_pub = {
-    "chem": [1,11],
-    "gen": [range(2, 7),13,14],
-    "phen": [range(7, 11),12],
-    "all": range(1,14),
-}
-classes_pub = [
-    "O",
-    "Chemical",
-    "Genomic_factor",
-    "Gene_or_protein",
-    "Genomic_variation",
-    "Limited_variation",
-    "Haplotype",
-    "Phenotype",
-    "Disease",
-    "Pharmacodynamic_phenotype",
-    "Pharmacokinetic_phenotype",
-    "Chemical",
-    "Disease",
-    "Gene",
-    "Mutation"
-]
+
 shift = 0
 
-
-# shift = 0
 
 
 def head_label(label, head):
@@ -64,11 +40,6 @@ def head_label(label, head):
     else:
         return 0
 
-def head_label_pub(label, head):
-    if label in labels_ranges_pub[head]:
-        return 1 + label - labels_ranges_pub[head][0]
-    else:
-        return 0
 
 
 classes = [
@@ -147,7 +118,7 @@ def load_ann(ann_path, head="all"):
     for i in T:
 
         label = Entity_types[i.split()[1]]
-        label = head_label_pub(label, head=head)
+        label = head_label(label, head=head)
 
         end_i = 3
         start = i.split()[2]
@@ -172,7 +143,7 @@ def load_ann_pub(ann_path, head="all"):
     for i in T:
 
         label = Entity_types_pub[i.split()[1]]
-        label = head_label_pub(label, head=head)
+        label = head_label(label, head=head)
 
         end_i = 3
         start = i.split()[2]
@@ -257,10 +228,6 @@ def brat(path, head):
 
 
 def headc(label):
-    # print('###')
-    # print(label)
-    # print(shift)
-    # print('###')
     return 0 if label == 0 else label + shift - 1
 
 
@@ -296,29 +263,29 @@ def words2IOBES_pub(words_labels_dataset):
     iobes_dataset = []
     for words in words_labels_dataset:
         iobes = [
-            classes_pub[headc(words[0])]
+            classes[headc(words[0])]
             if words[0] == 0
-            else "B-" + classes_pub[headc(words[0])]
+            else "B-" + classes[headc(words[0])]
         ]
 
         for i in range(1, len(words) - 1):
             # print(words[i])
             # print(headc(words[i]))
             if words[i] == 0:
-                iobes.append(classes_pub[headc(words[i])])
+                iobes.append(classes[headc(words[i])])
             elif words[i - 1] != words[i]:
                 # print(classes_pub[headc(words[i])])
-                iobes.append("B-" + classes_pub[headc(words[i])])
+                iobes.append("B-" + classes[headc(words[i])])
             elif words[i + 1] != words[i]:
-                iobes.append("E-" + classes_pub[headc(words[i])])
+                iobes.append("E-" + classes[headc(words[i])])
             else:
-                iobes.append("I-" + classes_pub[headc(words[i])])
+                iobes.append("I-" + classes[headc(words[i])])
 
         prefix = "E-" if words[-1] == words[-2] else "B-"
         iobes.append(
-            classes_pub[headc(words[-1])]
+            classes[headc(words[-1])]
             if words[-1] == 0
-            else prefix + classes_pub[headc(words[-1])]
+            else prefix + classes[headc(words[-1])]
         )
         iobes_dataset.append(iobes)
     return iobes_dataset

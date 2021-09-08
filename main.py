@@ -83,10 +83,8 @@ def Experence():
         print("/////////////////////////         CROSS RESULT          ///////////////////////////////")
 
         pred, true = Cross_validation.cross_validation(train_param, train_save, fold_num)
-    if(corpus_path=='pgx'):
-        pred_e, true_e= words2IOBES(pred), words2IOBES(true)
-    elif(corpus_path=='pgx_pub'):
-        pred_e, true_e= words2IOBES(pred), words2IOBES(true)
+    pred_e, true_e= words2IOBES(pred), words2IOBES(true)
+
 
 
 

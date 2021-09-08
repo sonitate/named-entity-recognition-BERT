@@ -48,23 +48,16 @@ class ModelCheckpoint:
         # print(Y[0])
         print("|||||||||||| do valid :", do_valid)
         print(corpus)
-        if corpus == "pgx":
-            f = f1_score(
-                y_pred=words2IOBES(pred),
-                y_true=words2IOBES(Y),
-                average=self.f_type,
-                scheme=IOBES,
-                mode="strict",
-            )
+
+        f = f1_score(
+            y_pred=words2IOBES(pred),
+            y_true=words2IOBES(Y),
+            average=self.f_type,
+            scheme=IOBES,
+            mode="strict",
+        )
         # torch.save(self.model, self.filepath +"/last_model.pt")
-        elif corpus == "pgx_pub":
-            f = f1_score(
-                y_pred=words2IOBES(pred),
-                y_true=words2IOBES(Y),
-                average=self.f_type,
-                scheme=IOBES,
-                mode="strict",
-            )
+
         F_type = global_param.traning_param["F_type"]
         exp_name = global_param.traning_param["exp_tag"]
         machine_name = os.uname()[1]
@@ -98,21 +91,15 @@ class ModelCheckpoint:
                 torch.save(self.model, self.filepath + "/best_model.pt")
             # print(corpus)
             # report = classification_report(y_pred= words2IOBES(pred), y_true= words2IOBES(Y),scheme=IOBES,mode='strict')
-            if corpus == "pgx":
-                report = classification_report(
-                    y_pred=words2IOBES(pred),
-                    y_true=words2IOBES(Y),
-                    scheme=IOBES,
-                    mode="strict",
-                )
+
             # torch.save(self.model, self.filepath +"/last_model.pt")
-            elif corpus == "pgx_pub":
-                report = classification_report(
-                    y_pred=words2IOBES(pred),
-                    y_true=words2IOBES(Y),
-                    scheme=IOBES,
-                    mode="strict",
-                )
+
+            report = classification_report(
+                y_pred=words2IOBES(pred),
+                y_true=words2IOBES(Y),
+                scheme=IOBES,
+                mode="strict",
+            )
             self.best_f = f
 
             printf(

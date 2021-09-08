@@ -53,6 +53,7 @@ class BertRecNER(nn.Module):
         self.level2=MLP(inputs=768+out)
         self.level3=MLP(inputs=768+out)
         self.three_levels_pub=MLP(out+pub)
+        self.pub_logits=MLP(inputs=5,out=5)
 
     def forward(self, x,corpus):
         if(corpus=='pgx_pub'):
@@ -62,14 +63,14 @@ class BertRecNER(nn.Module):
                 rep_vects = rep_vects[-1]
             if not isinstance(rep_pub, torch.Tensor):
                 rep_pub = rep_pub[-1]
+            rep_logits=self.pub_logits(rep_pub)
             level1_logits= self.level1(rep_vects)
             level2_inputs = torch.cat((rep_vects,level1_logits),dim=2)
             level2_logits = self.level2(level2_inputs)
             level3_inputs = torch.cat((rep_vects,level2_logits),dim=2)
             level3_logits = self.level3(level3_inputs)
             all_level=torch.cat((level1_logits, level2_logits, level3_logits),dim=1)##torch.Size([32, 243, 11])
-            all_level_pub=torch.cat((all_level,rep_pub),dim=2) ##torch.Size([32, 243, 16])
-            # output=self.three_levels_pub(all_level_pub)##torch.Size([32, 243, 11])
+            all_level_pub=torch.cat((all_level,rep_logits),dim=2) ##torch.Size([32, 243, 16])
             return all_level_pub
 
         elif(corpus=='pgx'):
