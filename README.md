@@ -67,3 +67,6 @@ fscore     0.637523  0.663320  0.649737  0.007154
 ```
 
 <img src="https://drive.google.com/uc?export=view&id=1606-ORWH1a4YAPgLyj_hrcvwknzuZGTp" width="500" height="300">
+
+
+Sonita's DocumentInternship : https://docs.google.com/document/d/1X7unS9VM5QX6mzvMYBQ0tz8b_GXS4cYDqq1sBc5bcZM/edit?usp=sharing

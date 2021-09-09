@@ -1,6 +1,7 @@
 import copy
 import os
 import torch
+import numpy as np
 
 # from sklearn.metrics import classification_report, f1_score
 from seqeval.metrics import classification_report, f1_score
@@ -55,6 +56,7 @@ class ModelCheckpoint:
             average=self.f_type,
             scheme=IOBES,
             mode="strict",
+            # labels=np.unique(pred) #fix the zero -division
         )
         # torch.save(self.model, self.filepath +"/last_model.pt")
 

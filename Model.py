@@ -34,7 +34,7 @@ class MLP(nn.Module):
 
 
 class BertRecNER(nn.Module):
-    def __init__(self, out=11,pub=5,dim_em=5, bert_type='bert'):
+    def __init__(self, out=11,pub=5,dim_em=6, bert_type='bert'):
         super(BertRecNER, self).__init__()
         _, self.bert_model = Bert.get_bert(bert_type=bert_type)
 
@@ -53,7 +53,7 @@ class BertRecNER(nn.Module):
         self.level2=MLP(inputs=768+out)
         self.level3=MLP(inputs=768+out)
         self.three_levels_pub=MLP(out+pub)
-        self.pub_logits=MLP(inputs=5,out=5)
+        self.pub_logits=MLP(inputs=dim_em,out=5)
 
     def forward(self, x,corpus):
         if(corpus=='pgx_pub'):
@@ -70,7 +70,7 @@ class BertRecNER(nn.Module):
             level3_inputs = torch.cat((rep_vects,level2_logits),dim=2)
             level3_logits = self.level3(level3_inputs)
             all_level=torch.cat((level1_logits, level2_logits, level3_logits),dim=1)##torch.Size([32, 243, 11])
-            all_level_pub=torch.cat((all_level,rep_logits),dim=2) ##torch.Size([32, 243, 16])
+            all_level_pub=torch.cat((all_level,rep_logits),dim=2) ##torch.Size([32, 243, 17])
             return all_level_pub
 
         elif(corpus=='pgx'):
